@@ -12,7 +12,6 @@ telescope.setup(
   }
 )
 telescope.load_extension('fzf')
-telescope.load_extension('frecency')
 telescope.load_extension('ui-select')
 telescope.load_extension('live_grep_args')
 
@@ -66,7 +65,8 @@ vim.keymap.set(
 
 vim.keymap.set('n', '<leader>ff', ':Telescope find_files theme=dropdown<cr>')
 vim.keymap.set(
-  'n', '<leader>fa', ':Telescope frecency workspace=CWD theme=dropdown<cr>'
+  'n', '<leader>fa',
+  ':Telescope find_files hidden=true no_ignore=true theme=dropdown<cr>'
 )
 vim.keymap.set('n', '<leader>?', ':Telescope help_tags theme=dropdown<cr>')
 
