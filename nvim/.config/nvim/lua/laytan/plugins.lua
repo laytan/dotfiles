@@ -33,16 +33,23 @@ return packer.startup(
     use({ 'williamboman/mason.nvim' })
     use({ 'WhoIsSethDaniel/mason-tool-installer.nvim' })
 
-    -- Needs cmake, make, (gcc or clang)
-    use({ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' })
     -- Needs ripgrep
     use(
       {
         'nvim-telescope/telescope.nvim',
-        tag = '0.1.x',
         requires = { { 'nvim-lua/plenary.nvim' } },
       }
     )
+    -- Needs cmake, make, (gcc or clang)
+    use({ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' })
+    use(
+      {
+        'nvim-telescope/telescope-frecency.nvim',
+        requires = { 'tami5/sqlite.lua' },
+      }
+    )
+    use({ 'nvim-telescope/telescope-ui-select.nvim' })
+    use({ 'nvim-telescope/telescope-live-grep-args.nvim' })
 
     use({ 'folke/tokyonight.nvim' })
 
@@ -187,8 +194,6 @@ return packer.startup(
     use({ 'phaazon/hop.nvim', branch = 'v2' })
 
     use({ 'stevearc/aerial.nvim' })
-
-    use({ 'stevearc/dressing.nvim' })
 
     use(
       {

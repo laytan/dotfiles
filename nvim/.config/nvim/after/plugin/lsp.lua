@@ -94,7 +94,7 @@ lspconfig.emmet_ls.setup(config({filetypes = {'html', 'twig'}}))
 lspconfig.elephp.setup(config({
     cmd = {
         "elephp", "--stdio", "-e php", "-e module", "-e install", "-e theme",
-        "-e sfc"
+        "-e sfc", "-e inc"
     },
     root_dir = php_root_dirs
 }))
