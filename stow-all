@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+if ! command -v stow &> /dev/null
+then
+    echo "stow command not found, install using 'brew install stow'"
+    exit
+fi
+
+stow alacritty
+stow composer
+stow git
+stow homebrew
+stow jetbrains
+stow karabiner
+stow nvim
+stow skhd
+stow yabai
+stow zsh

@@ -1,0 +1,43 @@
+let mapleader=" "
+
+set incsearch
+set relativenumber
+set ignorecase
+set smartcase
+set scrolloff=8
+
+nnoremap <leader>ff :action SearchEverywhere<CR>
+nnoremap <leader>ps :action FindInPath<CR>
+nnoremap <leader>d :action GotoDeclaration<CR>
+nnoremap <leader>h :action ShowErrorDescription<CR>
+nnoremap <leader>s :action FileStructurePopup<CR>
+nnoremap <leader>w :action FindUsages<CR>
+nnoremap <leader>r :action Refactorings.QuickListPopupAction<CR>
+
+nnoremap <leader>= :action ReformatCode<CR>
+
+nnoremap <leader>a :action ShowIntentionActions<CR>
+
+nnoremap <leader>n :action SolutionViewContextMenu<CR>
+
+vnoremap J :m '>+1 <CR>
+nnoremap <leader>j :m .+1<CR>==
+inoremap <C-j> <esc>:m .+1<CR>==i
+
+" Move line/selection up
+vnoremap K :m '<-2 <CR><CR>
+nnoremap <leader>k :m .-2<CR>==
+inoremap <C-k> <esc>:m .-2<CR>==i
+
+" Copy from cursor until end of line
+nnoremap Y y$
+
+" Keep cursor at one position when going next or previous
+nnoremap n nzzzv
+nnoremap N Nzzzv
+
+" Ctrl C === esc
+inoremap <C-c> <esc>
+
+" Replace all occurances
+vnoremap <C-r> "hy:%s/<C-r>h//g<left><left>
