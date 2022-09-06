@@ -16,86 +16,6 @@
                 },
                 "rules": [
                     {
-                        "description": "Disable Command-Shift-Option-Control-Period (.)",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "key_code": "period",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "command",
-                                            "shift",
-                                            "option",
-                                            "control"
-                                        ]
-                                    }
-                                },
-                                "to": [],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "Disable Command-Shift-Option-Control-Comma (,)",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "key_code": "comma",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "command",
-                                            "shift",
-                                            "option",
-                                            "control"
-                                        ]
-                                    }
-                                },
-                                "to": [],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "Disable Command-Shift-Option-Control-Slash (/)",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "key_code": "slash",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "command",
-                                            "shift",
-                                            "option",
-                                            "control"
-                                        ]
-                                    }
-                                },
-                                "to": [],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "Disable Command-Shift-Option-Control-W (w)",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "key_code": "w",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "command",
-                                            "shift",
-                                            "option",
-                                            "control"
-                                        ]
-                                    }
-                                },
-                                "to": [],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
                         "description": "Toggle CAPS_LOCK with LEFT_SHIFT + RIGHT_SHIFT",
                         "manipulators": [
                             {
@@ -534,7 +454,7 @@
                         ]
                     },
                     {
-                        "description": "CAPS_LOCK : (HYPER) SHIFT+COMMAND+OPTION+CONTROL or ESCAPE (If Alone)",
+                        "description": "CAPS_LOCK : CONTROL+OPTION+COMMAND or ESCAPE (If Alone)",
                         "manipulators": [
                             {
                                 "from": {
@@ -547,9 +467,8 @@
                                 },
                                 "to": [
                                     {
-                                        "key_code": "left_shift",
+                                        "key_code": "left_command",
                                         "modifiers": [
-                                            "left_command",
                                             "left_control",
                                             "left_option"
                                         ]
@@ -560,54 +479,6 @@
                                         "key_code": "escape"
                                     }
                                 ],
-                                "type": "basic"
-                            },
-                            {
-                                "description": "Avoid starting sysdiagnose with the built-in macOS shortcut cmd+shift+option+ctrl+,",
-                                "from": {
-                                    "key_code": "comma",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "command",
-                                            "shift",
-                                            "option",
-                                            "control"
-                                        ]
-                                    }
-                                },
-                                "to": [],
-                                "type": "basic"
-                            },
-                            {
-                                "description": "Avoid starting sysdiagnose with the built-in macOS shortcut cmd+shift+option+ctrl+.",
-                                "from": {
-                                    "key_code": "period",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "command",
-                                            "shift",
-                                            "option",
-                                            "control"
-                                        ]
-                                    }
-                                },
-                                "to": [],
-                                "type": "basic"
-                            },
-                            {
-                                "from": {
-                                    "description": "Avoid starting sysdiagnose with the built-in macOS shortcut cmd+shift+option+ctrl+/",
-                                    "key_code": "slash",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "command",
-                                            "shift",
-                                            "option",
-                                            "control"
-                                        ]
-                                    }
-                                },
-                                "to": [],
                                 "type": "basic"
                             }
                         ]
