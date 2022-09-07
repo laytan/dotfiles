@@ -15,7 +15,7 @@ M.config = function(_config)
         on_attach = function(client, bufnr)
 
             -- If the LSP client supports highlighting, set it up.
-            if client.resolved_capabilities.document_highlight then
+            if client.server_capabilities.documentHighlightProvider then
                 vim.api.nvim_create_autocmd({'CursorHold', 'CursorHoldI'}, {
                     group = higroup,
                     buffer = bufnr,

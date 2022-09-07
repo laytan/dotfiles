@@ -142,3 +142,5 @@ jira completion zsh > "${fpath[1]}/_jira"
 autoload -U compinit; compinit
 
 source "$HOME/.work"
+
+. /opt/homebrew/opt/asdf/libexec/asdf.sh
