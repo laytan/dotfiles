@@ -10,7 +10,7 @@ require('aerial').setup(
     end,
     width = 45,
     highlight_on_jump = false,
-    close_behavior = 'close',
     close_on_select = true,
+    close_automatic_events = { 'switch_buffer' },
   }
 )
