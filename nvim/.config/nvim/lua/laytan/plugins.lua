@@ -269,14 +269,7 @@ return packer.startup(
 
     use({ 'dstein64/vim-startuptime' })
 
-    use(
-      {
-        'laytan/cloak.nvim',
-        config = function()
-          require('cloak').setup()
-        end,
-      }
-    )
+    use({ '~/projects/cloak.nvim' })
 
     use(
       {
