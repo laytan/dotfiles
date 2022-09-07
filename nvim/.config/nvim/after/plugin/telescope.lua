@@ -1,7 +1,6 @@
 local telescope = require('telescope')
 local builtin = require('telescope.builtin')
 local themes = require('telescope.themes')
-local cursor_theme = themes.get_cursor()
 local dropdown_theme = themes.get_dropdown()
 
 telescope.setup(
@@ -14,22 +13,6 @@ telescope.setup(
 telescope.load_extension('fzf')
 telescope.load_extension('ui-select')
 telescope.load_extension('live_grep_args')
-
-vim.keymap.set(
-  'n', '<leader>d', function()
-    builtin.lsp_definitions(cursor_theme)
-  end
-)
-vim.keymap.set(
-  'n', '<leader>i', function()
-    builtin.lsp_implementation()
-  end
-)
-vim.keymap.set(
-  'n', '<leader>w', function()
-    builtin.lsp_references(dropdown_theme)
-  end
-)
 
 vim.keymap.set(
   'n', '<leader>ps', function()
