@@ -36,3 +36,6 @@ vim.opt.signcolumn = 'yes'
 vim.opt.clipboard = 'unnamedplus'
 
 vim.opt.ts = 4
+
+vim.opt.mouse = ''
+
