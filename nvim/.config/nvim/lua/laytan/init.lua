@@ -3,7 +3,6 @@ require('laytan.plugins')
 require('laytan.set')
 require('laytan.keymaps')
 require('laytan.autocommands')
-require('laytan.colors')
 require('laytan.drupal')
 require('laytan.git')
 

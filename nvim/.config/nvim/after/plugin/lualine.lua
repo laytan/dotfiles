@@ -39,7 +39,7 @@ end
 
 require('lualine').setup(
   {
-    options = { theme = 'nightfly' },
+    options = { theme = 'catppuccin' },
     sections = { lualine_x = { 'overseer', 'filetype' } },
     tabline = { lualine_c = { marks }, lualine_z = { { 'tabs', mode = 2 } } },
   }

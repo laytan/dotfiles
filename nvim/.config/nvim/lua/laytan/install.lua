@@ -54,6 +54,7 @@ local install_all = function()
   download_packer()
   ts_install_configured()
   vim.cmd(':GoInstallDeps')
+  require('catppuccin').compile()
 end
 
 return function()

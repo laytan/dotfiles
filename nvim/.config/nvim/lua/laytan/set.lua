@@ -39,3 +39,4 @@ vim.opt.ts = 4
 
 vim.opt.mouse = ''
 
+vim.opt.termguicolors = true

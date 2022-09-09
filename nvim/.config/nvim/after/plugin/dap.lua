@@ -28,3 +28,18 @@ vim.keymap.set(
 vim.keymap.set('n', '<leader>', dap.step_over)
 vim.keymap.set('n', '<leader>', dap.step_out)
 vim.keymap.set('n', '<leader>', dap.step_into)
+
+-- catppuccin
+local sign = vim.fn.sign_define
+sign(
+  'DapBreakpoint',
+  { text = '●', texthl = 'DapBreakpoint', linehl = '', numhl = '' }
+)
+sign(
+  'DapBreakpointCondition',
+  { text = '●', texthl = 'DapBreakpointCondition', linehl = '', numhl = '' }
+)
+sign(
+  'DapLogPoint',
+  { text = '◆', texthl = 'DapLogPoint', linehl = '', numhl = '' }
+)

@@ -14,6 +14,21 @@ if fn.empty(fn.glob(install_path)) > 0 then
   vim.cmd [[packadd packer.nvim]]
 end
 
+-- Compile catppuccin after packer compiles.
+vim.api.nvim_create_autocmd(
+  'User', {
+    pattern = 'PackerCompileDone',
+    callback = function()
+      vim.cmd 'CatppuccinCompile'
+      vim.defer_fn(
+        function()
+          vim.cmd 'colorscheme catppuccin'
+        end, 0
+      ) -- Defered for live reloading
+    end,
+  }
+)
+
 local packer = require('packer')
 return packer.startup(
   function(use)
@@ -44,8 +59,6 @@ return packer.startup(
     use({ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' })
     use({ 'nvim-telescope/telescope-ui-select.nvim' })
     use({ 'nvim-telescope/telescope-live-grep-args.nvim' })
-
-    use({ 'folke/tokyonight.nvim' })
 
     use({ 'L3MON4D3/LuaSnip' })
     use({ 'rafamadriz/friendly-snippets' })
@@ -205,8 +218,8 @@ return packer.startup(
       {
         'j-hui/fidget.nvim',
         config = function()
+          -- catppuccin window blend
           require('fidget').setup({ window = { blend = 0 } })
-          vim.cmd('hi FidgetTask guifg=#a9b1d6')
         end,
       }
     )
@@ -281,6 +294,8 @@ return packer.startup(
         end,
       }
     )
+
+    use({ 'catppuccin/nvim', as = 'catppuccin', run = ':CatppuccinCompile' })
 
     if Packer_bootstrap then
       packer.sync()
