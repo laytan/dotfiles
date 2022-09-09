@@ -199,6 +199,7 @@ return packer.startup(
     use({ 'folke/todo-comments.nvim' })
 
     use({ 'phaazon/hop.nvim', branch = 'v2' })
+    use({ 'rlane/pounce.nvim' })
 
     use({ 'stevearc/aerial.nvim' })
 
@@ -294,6 +295,8 @@ return packer.startup(
         end,
       }
     )
+
+    use({ '~/projects/hover.nvim' })
 
     use({ 'catppuccin/nvim', as = 'catppuccin', run = ':CatppuccinCompile' })
 
