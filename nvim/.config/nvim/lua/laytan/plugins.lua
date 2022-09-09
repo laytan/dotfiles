@@ -63,7 +63,7 @@ return packer.startup(
     use({ 'L3MON4D3/LuaSnip' })
     use({ 'rafamadriz/friendly-snippets' })
 
-    use({ 'dense-analysis/ale' })
+    use({ 'jose-elias-alvarez/null-ls.nvim', requires = { 'nvim-lua/plenary.nvim' } })
 
     use({ 'ThePrimeagen/harpoon', requires = { 'nvim-lua/plenary.nvim' } })
 

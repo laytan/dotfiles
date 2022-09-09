@@ -1,17 +1,9 @@
 {
     "require": {
-        "squizlabs/php_codesniffer": "*",
-        "phpmd/phpmd": "^2.10",
         "laravel/valet": "^2.16",
         "tightenco/takeout": "^1.8",
-        "dealerdirect/phpcodesniffer-composer-installer": "^0.7.1",
-        "phpstan/phpstan": "^1.0"
+        "beyondcode/expose": "^2.0"
     },
     "minimum-stability": "dev",
-    "prefer-stable": true,
-    "config": {
-        "allow-plugins": {
-            "dealerdirect/phpcodesniffer-composer-installer": true
-        }
-    }
+    "prefer-stable": true
 }

@@ -6,7 +6,7 @@ local dropdown_theme = themes.get_dropdown()
 local configs = require('lspconfig.configs')
 local util = require('lspconfig.util')
 local config, php_root_dirs = require('laytan.lsp').config,
-                              require('laytan.lsp').php_root_dirs
+    require('laytan.lsp').php_root_dirs
 local lsp_time = require('laytan.lsp_time')
 
 require('nvim-lightbulb').setup(
@@ -122,6 +122,7 @@ lspconfig.elephp.setup(
         '-e theme',
         '-e sfc',
         '-e inc',
+        '-v',
       },
       root_dir = php_root_dirs,
       handlers = lsp_time.get_handlers(
@@ -130,39 +131,27 @@ lspconfig.elephp.setup(
     }
   )
 )
-vim.lsp.set_log_level(vim.log.levels.INFO)
 
 lspconfig.gopls.setup(config({}))
 
--- Format the given patterns using the LSP when saving.
-vim.api.nvim_create_autocmd(
-  'BufWritePre', { pattern = { '*.cs' }, callback = vim.lsp.buf.formatting }
-)
-
 vim.keymap.set(
   'n', '<leader>d', function()
-    lsp_time.signal_start('textDocument/definition')
+  lsp_time.signal_start('textDocument/definition')
 
-    -- TODO: can we still use telescope? (lsp_time)
-    vim.lsp.buf.definition()
-  end
+  -- TODO: can we still use telescope? (lsp_time)
+  vim.lsp.buf.definition()
+end
 )
 vim.keymap.set(
   'n', '<leader>i', function()
-    builtin.lsp_implementation()
-  end
+  builtin.lsp_implementation()
+end
 )
 vim.keymap.set(
   'n', '<leader>w', function()
-    builtin.lsp_references(dropdown_theme)
-  end
+  builtin.lsp_references(dropdown_theme)
+end
 )
 vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename)
-vim.keymap.set(
-  'n', '<leader>hh', function()
-    lsp_time.signal_start('textDocument/hover')
-    vim.lsp.buf.hover()
-  end
-)
 vim.keymap.set('n', '<leader>a', vim.lsp.buf.code_action)
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)

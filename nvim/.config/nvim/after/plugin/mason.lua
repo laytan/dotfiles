@@ -1,32 +1,48 @@
 require('mason').setup()
 
--- Missing:
---  stylelint_lsp
-
 require('mason-tool-installer').setup(
   {
     ensure_installed = {
+      -- General
+      'editorconfig-checker',
+      -- PHP
+      'phpactor',
+      'phpcs',
+      'phpcbf',
+      'phpmd',
+      'phpstan',
+      -- Twig
+      'twigcs',
+      -- HTML
+      'emmet-ls',
       -- GO
       'gopls',
       'delve',
-
-      -- LUA
+      'golangci-lint',
+      'gofumpt',
+      'golines',
+      'goimports-reviser',
+      -- Lua
       'lua-language-server',
-
-      -- Frontend
-      'typescript-language-server',
+      'selene',
+      'luaformatter',
+      -- CSS
       'tailwindcss-language-server',
+      'stylelint-lsp',
+      -- JS
+      'typescript-language-server',
       'vue-language-server',
-      'emmet-ls',
-
-      -- CSharp
-      'csharp-language-server',
-
+      'eslint_d',
+      -- Git
+      -- Docker
+      'hadolint',
       -- Python
       'pyright',
-
-      -- PHP
-      'phpactor',
+      'isort',
+      -- JSON
+      'fixjson',
+      -- CSharp
+      'csharp-language-server',
     },
   }
 )
