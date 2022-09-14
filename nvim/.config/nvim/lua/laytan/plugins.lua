@@ -17,16 +17,16 @@ end
 -- Compile catppuccin after packer compiles.
 vim.api.nvim_create_autocmd(
   'User', {
-    pattern = 'PackerCompileDone',
-    callback = function()
-      vim.cmd 'CatppuccinCompile'
-      vim.defer_fn(
-        function()
-          vim.cmd 'colorscheme catppuccin'
-        end, 0
-      ) -- Defered for live reloading
-    end,
-  }
+  pattern = 'PackerCompileDone',
+  callback = function()
+    vim.cmd 'CatppuccinCompile'
+    vim.defer_fn(
+      function()
+        vim.cmd 'colorscheme catppuccin'
+      end, 0
+    ) -- Defered for live reloading
+  end,
+}
 )
 
 local packer = require('packer')
@@ -63,7 +63,12 @@ return packer.startup(
     use({ 'L3MON4D3/LuaSnip' })
     use({ 'rafamadriz/friendly-snippets' })
 
-    use({ 'jose-elias-alvarez/null-ls.nvim', requires = { 'nvim-lua/plenary.nvim' } })
+    use(
+      {
+        'jose-elias-alvarez/null-ls.nvim',
+        requires = { 'nvim-lua/plenary.nvim' },
+      }
+    )
 
     use({ 'ThePrimeagen/harpoon', requires = { 'nvim-lua/plenary.nvim' } })
 
@@ -296,7 +301,7 @@ return packer.startup(
       }
     )
 
-    use({ '~/projects/hover.nvim' })
+    use({ 'lewis6991/hover.nvim' })
 
     use({ 'catppuccin/nvim', as = 'catppuccin', run = ':CatppuccinCompile' })
 
@@ -305,4 +310,3 @@ return packer.startup(
     end
   end
 )
-
