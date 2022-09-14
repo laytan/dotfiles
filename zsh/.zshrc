@@ -114,12 +114,17 @@ alias grum="vendor/bin/grumphp run"
 alias drupal="vendor/bin/drupal"
 alias drush="vendor/bin/drush"
 alias sail="vendor/bin/sail"
-alias v="nvim ."
-alias vi="nvim"
-alias vim="nvim"
 alias cat="bat"
 # Search history with fzf and execute selected entry.
 alias h="\$(history | fzf --tac | sed 's/[^ ]* //')"
+
+# NVIM
+alias v="nvim ."
+alias vi="nvim"
+alias vim="nvim"
+alias update-nvim-stable='asdf uninstall neovim stable && asdf install neovim stable'
+alias update-nvim-nightly='asdf uninstall neovim nightly && asdf install neovim nightly'
+alias update-nvim-master='asdf uninstall neovim ref:master && asdf install neovim ref:master'
 
 [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 
