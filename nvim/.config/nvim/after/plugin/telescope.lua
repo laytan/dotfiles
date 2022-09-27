@@ -27,7 +27,7 @@ end
 telescope.setup(
   {
     extensions = {
-      ['ui-select'] = { theme },
+      ['ui-select'] = { theme() },
       live_grep_args = {
         default_mappings = {},
         mappings = { i = { ['<C-e>'] = lga_actions.quote_prompt() } },
