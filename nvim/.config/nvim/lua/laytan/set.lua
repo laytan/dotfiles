@@ -46,3 +46,5 @@ vim.opt.spell = true
 
 vim.opt.cmdheight=0
 vim.opt.laststatus=3
+
+vim.opt.shortmess:append('s')

@@ -41,3 +41,6 @@ vim.api.nvim_create_autocmd(
     end,
 }
 )
+
+vim.cmd([[hi WinSeparator guifg=#363a4f]])
+
