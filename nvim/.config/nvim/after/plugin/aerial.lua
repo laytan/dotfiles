@@ -5,8 +5,10 @@ require('aerial').setup(
         bufnr, 'n', '<leader>fo', '<cmd>AerialToggle float<CR>', {}
       )
 
-      vim.api.nvim_buf_set_keymap(bufnr, 'n', '[[', '<cmd>AerialPrev<CR>', {})
-      vim.api.nvim_buf_set_keymap(bufnr, 'n', ']]', '<cmd>AerialNext<CR>', {})
+      vim.api
+          .nvim_buf_set_keymap(bufnr, 'n', '<C-r>', '<cmd>AerialPrev<CR>', {})
+      vim.api
+          .nvim_buf_set_keymap(bufnr, 'n', '<C-t>', '<cmd>AerialNext<CR>', {})
     end,
     width = 45,
     highlight_on_jump = false,

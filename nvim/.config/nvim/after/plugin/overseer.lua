@@ -1,9 +1,9 @@
 local overseer = require('overseer')
 overseer.setup({})
 
-vim.keymap.set('n', '<leader>ov', ':OverseerToggle! right<cr>')
-vim.keymap.set('n', '<leader>oa', ':OverseerTaskAction<cr>')
-vim.keymap.set('n', '<leader>or', ':OverseerRun<cr>')
+vim.keymap.set('n', '<leader>ov', ':silent :OverseerToggle! right<cr>')
+vim.keymap.set('n', '<leader>oa', ':silent :OverseerTaskAction<cr>')
+vim.keymap.set('n', '<leader>or', ':silent :OverseerRun<cr>')
 
 overseer.register_template(
   {

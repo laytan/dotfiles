@@ -42,6 +42,8 @@ local wanted_ts_parsers = {
   'vue',
   'yaml',
   'make',
+  'python',
+  'twig',
 }
 
 local ts_install_configured = function()

@@ -22,5 +22,5 @@ require('todo-comments').setup(
   }
 )
 
-vim.keymap.set('n', '<leader>td', ':TodoTelescope theme=dropdown<cr>')
+vim.keymap.set('n', '<leader>td', ':silent :TodoTelescope theme=dropdown<cr>')
 

@@ -11,9 +11,11 @@ require('nvim-treesitter.configs').setup(
           ['if'] = '@function.inner',
           ['ac'] = '@class.outer',
           ['ic'] = '@class.inner',
-          ['ib'] = '@block.inner',
-          ['ab'] = '@block.outer',
+          ['ii'] = '@conditional.inner',
+          ['ai'] = '@conditional.outer',
           ['a/'] = '@comment.outer',
+          ['al'] = '@loop.outer',
+          ['il'] = '@loop.inner',
         },
       },
       swap = {

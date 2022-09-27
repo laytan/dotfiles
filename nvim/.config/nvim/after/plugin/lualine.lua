@@ -7,6 +7,8 @@ local function basename(path)
   return path:sub(last_slash_at + 1)
 end
 
+vim.cmd([[hi WinSeparator guifg=#363a4f]])
+
 -- Show harpoon marks.
 local harpoon = require('harpoon')
 local harpoon_mark = require('harpoon.mark')

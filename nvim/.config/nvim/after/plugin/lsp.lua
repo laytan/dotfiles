@@ -152,6 +152,15 @@ vim.keymap.set(
   builtin.lsp_references(dropdown_theme)
 end
 )
+
 vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename)
 vim.keymap.set('n', '<leader>a', vim.lsp.buf.code_action)
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
+
+vim.keymap.set('i', '<C-h>', vim.lsp.buf.signature_help)
+
+vim.keymap.set(
+  'n', '<C-f>', function()
+  vim.lsp.buf.format({ async = true })
+end
+)

@@ -8,28 +8,40 @@ local higroup = vim.api.nvim_create_augroup('hilspiepie', {})
 
 local M = {}
 
-M.config = function(_config)
-    return vim.tbl_deep_extend('force', {
-        capabilities = cmp_nvim_lsp.update_capabilities(vim.lsp.protocol
-                                                            .make_client_capabilities()),
-        on_attach = function(client, bufnr)
+M.config = function(_config, on_attach)
+    local dec_on_attach = function(client, bufnr)
+        -- If the LSP client supports highlighting, set it up.
+        if client.server_capabilities.documentHighlightProvider then
+            vim.api.nvim_create_autocmd(
+                { 'CursorHold', 'CursorHoldI' }, {
+                group = higroup,
+                buffer = bufnr,
+                callback = vim.lsp.buf.document_highlight,
+            }
+            )
 
-            -- If the LSP client supports highlighting, set it up.
-            if client.server_capabilities.documentHighlightProvider then
-                vim.api.nvim_create_autocmd({'CursorHold', 'CursorHoldI'}, {
-                    group = higroup,
-                    buffer = bufnr,
-                    callback = vim.lsp.buf.document_highlight
-                })
-
-                vim.api.nvim_create_autocmd('CursorMoved', {
-                    group = higroup,
-                    buffer = bufnr,
-                    callback = vim.lsp.buf.clear_references
-                })
-            end
+            vim.api.nvim_create_autocmd(
+                'CursorMoved', {
+                group = higroup,
+                buffer = bufnr,
+                callback = vim.lsp.buf.clear_references,
+            }
+            )
         end
-    }, _config or {})
+
+        if on_attach ~= nil then
+            on_attach(client, bufnr)
+        end
+    end
+
+    return vim.tbl_deep_extend(
+        'keep', {
+            capabilities = cmp_nvim_lsp.update_capabilities(
+                vim.lsp.protocol.make_client_capabilities()
+            ),
+            on_attach = dec_on_attach,
+        }, _config or {}
+    )
 end
 
 -- Makes Drupal modules have the base Drupal site as their root dir.
@@ -37,10 +49,11 @@ end
 M.php_root_dirs = function(fname)
     local is_drupal_module = util.root_pattern('modules')(fname) ~= nil
 
-    if is_drupal_module then return util.root_pattern('web')(fname) end
+    if is_drupal_module then
+        return util.root_pattern('web')(fname)
+    end
 
     return util.root_pattern('.git')(fname)
 end
 
 return M
-
