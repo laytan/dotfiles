@@ -61,11 +61,12 @@ return packer.startup(
     use 'davidsierradz/cmp-conventionalcommits'
     use { 'tzachar/cmp-tabnine', run = './install.sh' }
 
-    -- Treesitter.
+    -- Treesitter
     use {
-      'gbprod/nvim-treesitter',
-      run = ':TSUpdate',
-      branch = 'introduce-twig-parser',
+      'nvim-treesitter/nvim-treesitter',
+      run = function()
+        require('nvim-treesitter.install').update { with_sync = true }
+      end,
     }
     -- See the underlying nodes that treesitter uses and visually see results
     -- of queries.
@@ -82,30 +83,27 @@ return packer.startup(
 
     use 'tpope/vim-sleuth'
 
-    -- use 'mfussenegger/nvim-dap'
-    -- use({ 'rcarriga/nvim-dap-ui', requires = { 'mfussenegger/nvim-dap' } })
-    -- use(
-    --   {
-    --     'theHamsta/nvim-dap-virtual-text',
-    --     requires = { 'mfussenegger/nvim-dap' },
-    --   }
-    -- )
-    -- use(
-    --   {
-    --     'leoluz/nvim-dap-go',
-    --     config = function()
-    --       require('dap-go').setup()
-    --     end,
-    --   }
-    -- )
+    use 'mfussenegger/nvim-dap'
+    use({ 'rcarriga/nvim-dap-ui', requires = { 'mfussenegger/nvim-dap' } })
+    use(
+      {
+        'theHamsta/nvim-dap-virtual-text',
+        requires = { 'mfussenegger/nvim-dap' },
+      }
+    )
 
-    -- See https://github.com/neovim/neovim/pull/19243.
-    use {
-      'luukvbaal/stabilize.nvim',
-      config = function()
-        require('stabilize').setup()
-      end,
-    }
+    use(
+      {
+        'mfussenegger/nvim-dap-python',
+        requires = { 'mfussenegger/nvim-dap' },
+        config = function()
+          require('dap-python').setup('~/.virtualenvs/debugpy/bin/python')
+          require('dap-python').resolve_python = function()
+            return '/Users/laytan/.pyenv/shims/python'
+          end
+        end,
+      }
+    )
 
     use 'folke/todo-comments.nvim'
 
@@ -119,6 +117,7 @@ return packer.startup(
       'olexsmir/gopher.nvim',
       config = function()
         require('gopher').setup({})
+        require('gopher.dap').setup()
       end,
     }
 
@@ -150,16 +149,21 @@ return packer.startup(
 
     use 'gen740/SmoothCursor.nvim'
 
-    use {
-      'petertriho/nvim-scrollbar',
-      config = function()
-        require('scrollbar').setup()
-      end,
-    }
-
     use 'vim-scripts/ReplaceWithRegister'
 
     use 'ellisonleao/glow.nvim'
     use 'm00qek/baleia.nvim'
+
+    use(
+      {
+        'aurum77/live-server.nvim',
+        run = function()
+          require 'live_server.util'.install()
+        end,
+        config = function()
+          require('live_server').setup()
+        end
+      }
+    )
   end
 )

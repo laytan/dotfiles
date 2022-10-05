@@ -8,6 +8,7 @@ export PATH=$HOME/.dotnet/tools:$PATH
 export PATH=$HOME/go/bin:$PATH
 export PATH=$HOME/tools:$PATH
 export PATH=$HOME/.local/share/nvim/mason/bin:$PATH
+export PATH=$(pyenv root)/shims:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -115,13 +116,10 @@ alias drupal="vendor/bin/drupal"
 alias drush="vendor/bin/drush"
 alias sail="vendor/bin/sail"
 alias cat="bat"
-# Search history with fzf and execute selected entry.
-alias h="\$(history | fzf --tac | sed 's/[^ ]* //')"
 
 # NVIM
 alias v="nvim ."
 alias vi="nvim"
-alias vim="nvim"
 alias update-nvim-stable='asdf uninstall neovim stable && asdf install neovim stable'
 alias update-nvim-nightly='asdf uninstall neovim nightly && asdf install neovim nightly'
 alias update-nvim-master='asdf uninstall neovim ref:master && asdf install neovim ref:master'
@@ -149,3 +147,5 @@ autoload -U compinit; compinit
 source "$HOME/.work"
 
 . /opt/homebrew/opt/asdf/libexec/asdf.sh
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

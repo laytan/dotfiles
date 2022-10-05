@@ -18,10 +18,10 @@ tabnine:setup({ show_prediction_strength = true })
 local source_mapping = {
   buffer = '[Buf]',
   nvim_lsp = '[Lsp]',
-  cmp_tabnine = '[Tn]',
+  cmp_tabnine = '[TN]',
   path = '[Path]',
   luasnips = '[Snip]',
-  ['vim-dadbod-completion'] = '[Db]',
+  ['vim-dadbod-completion'] = '[DB]',
   jira = '[Jira]',
   conventionalcommits = '[Commy]',
   cmdline = '[Cmd]',
@@ -72,6 +72,7 @@ cmp.setup(
       { name = 'buffer', keyword_length = 4 },
       { name = 'path', keyword_length = 4 },
     },
+    preselect = { cmp.PreselectMode.None },
   }
 )
 

@@ -1,6 +1,6 @@
 {
     "require": {
-        "laravel/valet": "^2.16",
+        "laravel/valet": "^3",
         "tightenco/takeout": "^1.8",
         "beyondcode/expose": "^2.0"
     },

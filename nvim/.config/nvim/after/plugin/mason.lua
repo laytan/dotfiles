@@ -11,6 +11,7 @@ require('mason-tool-installer').setup(
       'phpcbf',
       'phpmd',
       'phpstan',
+      'php-debug-adapter',
       -- Twig
       'twigcs',
       -- HTML
@@ -43,6 +44,10 @@ require('mason-tool-installer').setup(
       'fixjson',
       -- CSharp
       'csharp-language-server',
+      -- Terraform
+      'terraform-ls',
+      -- Yaml
+      'yaml-language-server',
     },
   }
 )

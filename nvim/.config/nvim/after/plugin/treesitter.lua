@@ -3,6 +3,7 @@ require('nvim-treesitter.configs').setup(
     highlight = { enable = true },
     playground = { enable = true },
     textobjects = {
+      include_surrounding_whitespace = true,
       select = {
         enable = true,
         lookahead = true,

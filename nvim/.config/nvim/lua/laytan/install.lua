@@ -44,6 +44,9 @@ local wanted_ts_parsers = {
   'make',
   'python',
   'twig',
+  'query',
+  -- Terraform
+  'hcl',
 }
 
 local ts_install_configured = function()

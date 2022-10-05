@@ -45,7 +45,7 @@ null.setup(
       -- Diagnostics
       --
       -- General
-      diagnostics.trail_space,
+      diagnostics.trail_space.with(fmt_no_code),
       -- PHP
       diagnostics.phpstan.with(local_composer).with(fmt_no_code).with(
         {
@@ -77,7 +77,7 @@ null.setup(
       -- Lua
       diagnostics.selene,
       -- JS
-      diagnostics.eslint_d,
+      diagnostics.eslint_d.with(fmt_no_code),
       diagnostics.tsc,
       -- Docker
       diagnostics.hadolint,

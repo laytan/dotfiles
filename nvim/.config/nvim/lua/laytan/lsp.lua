@@ -36,7 +36,7 @@ M.config = function(_config, on_attach)
 
     return vim.tbl_deep_extend(
         'keep', {
-            capabilities = cmp_nvim_lsp.update_capabilities(
+            capabilities = cmp_nvim_lsp.default_capabilities(
                 vim.lsp.protocol.make_client_capabilities()
             ),
             on_attach = dec_on_attach,
@@ -48,12 +48,17 @@ end
 -- Makes cakephp plugins have the base cake app as their root dir.
 M.php_root_dirs = function(fname)
     local is_drupal_module = util.root_pattern('modules')(fname) ~= nil
+    local is_cake_plugin = util.root_pattern('plugins')(fname) ~= nil
 
     if is_drupal_module then
         return util.root_pattern('web')(fname)
     end
 
-    return util.root_pattern('.git')(fname)
+    if is_cake_plugin then
+        return util.root_pattern('plugins')(fname)
+    end
+
+    return util.root_pattern('composer.json')(fname) or util.root_pattern('.git')(fname)
 end
 
 return M

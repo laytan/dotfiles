@@ -42,16 +42,7 @@ configs.composer = {
 
 lspconfig.tsserver.setup(config())
 
-lspconfig.tailwindcss.setup(
-  config(
-    {
-      root_dir = require('lspconfig.util').root_pattern(
-        'tailwind.config.js', 'tailwind.config.ts'
-      ),
-      filetypes = { 'blade', 'html', 'twig', 'css', 'scss', 'vue', 'svelte' },
-    }
-  )
-)
+lspconfig.tailwindcss.setup(config())
 
 lspconfig.volar.setup(config())
 
@@ -61,11 +52,11 @@ lspconfig.csharp_ls.setup(config())
 
 lspconfig.pyright.setup(config())
 
-lspconfig.stylelint_lsp.setup(
-  config(
-    { filetypes = { 'css', 'scss', 'vue', 'html', 'blade', 'twig' } }
-  )
-)
+-- lspconfig.stylelint_lsp.setup(
+--   config(
+--     { filetypes = { 'css', 'scss', 'vue', 'html', 'blade', 'twig' } }
+--   )
+-- )
 
 lspconfig.sumneko_lua.setup(
   config(
@@ -92,7 +83,7 @@ lspconfig.sumneko_lua.setup(
   )
 )
 
-lspconfig.emmet_ls.setup(config({ filetypes = { 'html', 'twig' } }))
+lspconfig.emmet_ls.setup(config({ filetypes = { 'html', 'twig', 'typescriptreact' } }))
 
 -- lspconfig.phpactor.setup(
 --   config(
@@ -133,6 +124,10 @@ lspconfig.elephp.setup(
 )
 
 lspconfig.gopls.setup(config({}))
+
+lspconfig.terraformls.setup({})
+
+lspconfig.yamlls.setup({})
 
 vim.keymap.set(
   'n', '<leader>d', function()
