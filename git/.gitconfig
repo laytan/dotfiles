@@ -4,6 +4,7 @@
 [core]
 	filemode = false
 	editor = nvim
+	excludesFile = ~/.gitignore
 [pull]
 	rebase = false
 [init]
