@@ -6,7 +6,6 @@ require('mason-tool-installer').setup(
       -- General
       'editorconfig-checker',
       -- PHP
-      'phpactor',
       'phpcs',
       'phpcbf',
       'phpmd',

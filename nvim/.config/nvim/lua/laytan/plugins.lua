@@ -28,7 +28,7 @@ return packer.startup(
     use 'ThePrimeagen/harpoon'
 
     -- Git.
-    use 'tpope/vim-fugitive'
+    use 'laytan/neogit'
 
     -- Databases.
     use 'tpope/vim-dadbod'
@@ -131,6 +131,7 @@ return packer.startup(
 
     use {
       'phaazon/mind.nvim',
+      branch = 'v2.2',
       config = function()
         require('mind').setup()
       end,

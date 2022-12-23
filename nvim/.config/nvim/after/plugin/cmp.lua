@@ -101,8 +101,20 @@ cmp.setup.cmdline(
     mapping = cmp.mapping.preset.cmdline(),
     sources = cmp.config.sources(
       {
-        { name = 'cmdline', keyword_length = 3 },
-        { name = 'cmdline_history', keyword_length = 5 },
+        { name = 'cmdline', keyword_length = 2 },
+        { name = 'cmdline_history', keyword_length = 2 },
+      }
+    ),
+  }
+)
+
+cmp.setup.cmdline(
+  '@', {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = cmp.config.sources(
+      {
+        { name = 'cmdline', keyword_length = 5 },
+        { name = 'cmdline_history', keyword_length = 2 },
       }
     ),
   }
