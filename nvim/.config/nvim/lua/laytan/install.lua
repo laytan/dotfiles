@@ -1,25 +1,23 @@
-local download_packer = function()
-  if vim.fn.input('Download Packer? (y for yes)') ~= 'y' then
-    return
-  end
-
-  local directory = string.format(
-    '%s/site/pack/packer/start/', vim.fn.stdpath('data')
+-- Check if lazy.nvim is installed, install if not.
+local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
+if not vim.loop.fs_stat(lazypath) then
+  vim.notify(
+    'Pulling the "lazy.nvim" plugin manager into "' .. lazypath .. '"',
+    vim.log.levels.INFO
   )
 
-  vim.fn.mkdir(directory, 'p')
-
-  local out = vim.fn.system(
-    string.format(
-      'git clone %s %s', 'https://github.com/wbthomason/packer.nvim',
-      directory .. '/packer.nvim'
-    )
+  vim.fn.system(
+    {
+      'git',
+      'clone',
+      '--filter=blob:none',
+      '--single-branch',
+      'https://github.com/folke/lazy.nvim.git',
+      lazypath,
+    }
   )
-
-  print(out)
-  print('Downloading packer.nvim...')
-  print('( You\'ll need to restart now )')
 end
+vim.opt.runtimepath:prepend(lazypath)
 
 -- Run :TSInstallConfigured to install the following parsers:
 local wanted_ts_parsers = {
@@ -49,29 +47,18 @@ local wanted_ts_parsers = {
   'hcl',
 }
 
-local ts_install_configured = function()
-  for _, value in ipairs(wanted_ts_parsers) do
-    vim.cmd(':TSInstall ' .. value)
-  end
-end
+vim.api.nvim_create_user_command(
+  'TSInstallConfigured', function()
+    for _, value in ipairs(wanted_ts_parsers) do
+      vim.cmd(':TSInstall ' .. value)
+    end
+  end, {}
+)
 
-local install_all = function()
-  download_packer()
-  ts_install_configured()
-  vim.cmd(':GoInstallDeps')
-  require('catppuccin').compile()
-end
-
-return function()
-  vim.api.nvim_create_user_command(
-    'TSInstallConfigured', ts_install_configured, {}
-  )
-
-  vim.api.nvim_create_user_command('InstallNvim', install_all, {})
-
-  if not pcall(require, 'packer') then
-    return true
-  end
-
-  return false
-end
+vim.api.nvim_create_user_command(
+  'InstallNvim', function()
+    vim.cmd(':TSInstallConfigured')
+    vim.cmd(':GoInstallDeps')
+    require('catppuccin').compile()
+  end, {}
+)
