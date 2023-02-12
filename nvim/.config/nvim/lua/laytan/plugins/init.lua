@@ -3,6 +3,8 @@ return {
   { 'nvim-lua/plenary.nvim', lazy = true },
   { 'kyazdani42/nvim-web-devicons', lazy = true },
 
+  { 'folke/neodev.nvim', lazy = true, config = true },
+
   -- Pretty vim.notify output.
   {
     'rcarriga/nvim-notify',
@@ -10,6 +12,17 @@ return {
       local notify = require('notify')
       notify.setup({ timeout = 1500, background_colour = '#000000' })
       vim.notify = notify
+    end,
+  },
+
+  { 'lewis6991/gitsigns.nvim', config = true, event = 'BufEnter' },
+
+  {
+    'rhysd/git-messenger.vim',
+    keys = '<leader>gm',
+    cmd = 'GitMessenger',
+    config = function()
+      vim.g.git_messenger_always_into_popup = true
     end,
   },
 
@@ -23,7 +36,7 @@ return {
   },
 
   -- Better and language aware commenting.
-  { 'numToStr/Comment.nvim', event = 'BufEnter', config = {} },
+  { 'numToStr/Comment.nvim', event = 'BufEnter', config = true },
 
   -- Live preview markdown.
   {
@@ -36,24 +49,14 @@ return {
   },
 
   -- GO utility and debugging.
-  { 'olexsmir/gopher.nvim', ft = 'go', config = {} },
+  { 'olexsmir/gopher.nvim', ft = 'go', config = true },
 
   -- Powerful note taking.
   -- CmdlineEnter so we get auto-complete for the commands.
-  { 'phaazon/mind.nvim', branch = 'v2.2', event = 'CmdlineEnter', config = {} },
+  { 'phaazon/mind.nvim', branch = 'v2.2', event = 'CmdlineEnter', config = true },
 
   -- Powerful surround textobjects/actions.
-  { 'kylechui/nvim-surround', event = 'VeryLazy', config = {} },
-
-  -- Show cursor location/movement in sidebar.
-  {
-    'gen740/SmoothCursor.nvim',
-    event = { 'CursorMoved', 'CursorMovedI' },
-    config = function()
-      require('smoothcursor').setup()
-      vim.cmd('highlight SmoothCursor guifg=#8aadf4')
-    end,
-  },
+  { 'kylechui/nvim-surround', event = 'VeryLazy', config = true },
 
   -- Put but without clearing put register.
   { 'vim-scripts/ReplaceWithRegister', event = 'VeryLazy' },
@@ -66,17 +69,17 @@ return {
     end,
     -- CmdlineEnter so we get auto-complete for the commands.
     event = 'CmdlineEnter',
-    config = {},
+    config = true,
   },
 
   -- Shortcuts for inserting and removing debug and print statements.
   {
     'andrewferrier/debugprint.nvim',
     event = 'VeryLazy',
-    config = {
+    opts = {
       filetypes = {
         ['php'] = {
-          left = [[dump(']],
+          left = [[ray(']],
           right = [[');]],
           mid_var = [[', $]],
           right_var = [[);]],
@@ -89,7 +92,7 @@ return {
   {
     'NvChad/nvim-colorizer.lua',
     event = 'BufEnter',
-    config = {
+    opts = {
       user_default_options = {
         rgb_fn = true,
         hsl_fn = true,
@@ -98,4 +101,6 @@ return {
       },
     },
   },
+
+  { 'shortcuts/no-neck-pain.nvim', version = '*', event = 'CmdlineEnter' },
 }

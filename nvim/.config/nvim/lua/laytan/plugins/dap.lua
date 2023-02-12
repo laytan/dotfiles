@@ -40,8 +40,8 @@ return {
       vim.keymap.set('n', '<leader>bb', ':DapToggleBreakpoint<cr>')
       vim.keymap.set(
         'n', '<leader>bB', function()
-        dap.toggle_breakpoint(vim.fn.input('[DAP] Condition > '))
-      end
+          dap.toggle_breakpoint(vim.fn.input('[DAP] Condition > '))
+        end
       )
       vim.keymap.set('n', '<Right>', dap.step_over)
       vim.keymap.set('n', '<Up>', dap.step_out)
@@ -55,11 +55,11 @@ return {
       )
       sign(
         'DapBreakpointCondition', {
-        text = '●',
-        texthl = 'DapBreakpointCondition',
-        linehl = '',
-        numhl = '',
-      }
+          text = '●',
+          texthl = 'DapBreakpointCondition',
+          linehl = '',
+          numhl = '',
+        }
       )
       sign(
         'DapLogPoint',
@@ -126,11 +126,11 @@ return {
 
       vim.api.nvim_create_autocmd(
         'FileType', {
-        pattern = ft_pattern,
-        callback = function(data)
-          on_ft(data.match)
-        end,
-      }
+          pattern = ft_pattern,
+          callback = function(data)
+            on_ft(data.match)
+          end,
+        }
       )
     end,
   },

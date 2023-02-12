@@ -16,3 +16,5 @@
 	bd = "!bd() { branch=${1:-$(git branch --show-current)}; ticket=$(cut -d \"/\" -f1 <<< \"$branch\"); first=$(git log $branch --oneline | grep -v -m 1 $ticket); commit=$(cut -d \" \" -f1 <<< \"$first\"); git diff $commit..$branch; }; bd"
 [push]
 	autoSetupRemote = true
+[rerere]
+	enabled = true

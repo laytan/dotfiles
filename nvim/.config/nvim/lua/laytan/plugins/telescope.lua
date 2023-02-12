@@ -5,6 +5,11 @@ return {
     'nvim-telescope/telescope-ui-select.nvim',
     'nvim-telescope/telescope-live-grep-args.nvim',
     { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+    {
+      'prochri/telescope-all-recent.nvim',
+      dependencies = { 'kkharji/sqlite.lua' },
+      config = {},
+    },
   },
   -- NOTE: telescope handles vim.ui.select, I did not find a way to have it
   -- lazy load when that is called, so this seems the best we can do.

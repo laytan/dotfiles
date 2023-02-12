@@ -13,19 +13,19 @@ return {
       {
         init = function()
           require('hover.providers.lsp')
-          require('hover.providers.dictionary')
           require('hover.providers.jira')
           require('laytan.hover.gh_repos')
         end,
         preview_opts = { border = false },
+        preview_window = true,
         title = false,
       }
     )
 
     vim.keymap.set(
       'n', '<leader>hh', function()
-      hover.hover()
-    end
+        hover.hover()
+      end
     )
   end,
 }

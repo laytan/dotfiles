@@ -17,43 +17,43 @@ return {
 
     vim.keymap.set(
       'n', '<leader>ha', function()
-      mark.add_file()
-    end
+        mark.add_file()
+      end
     )
     vim.keymap.set(
       'n', '<leader>hd', function()
-      mark.rm_file()
-    end
+        mark.rm_file()
+      end
     )
     vim.keymap.set(
       'n', '<leader>hc', function()
-      mark.clear_all()
-    end
+        mark.clear_all()
+      end
     )
     vim.keymap.set(
       'n', '<leader>hl', function()
-      ui.toggle_quick_menu()
-    end
+        ui.toggle_quick_menu()
+      end
     )
     vim.keymap.set(
       'n', '<leader>j', function()
-      ui.nav_file(1)
-    end
+        ui.nav_file(1)
+      end
     )
     vim.keymap.set(
       'n', '<leader>k', function()
-      ui.nav_file(2)
-    end
+        ui.nav_file(2)
+      end
     )
     vim.keymap.set(
       'n', '<leader>l', function()
-      ui.nav_file(3)
-    end
+        ui.nav_file(3)
+      end
     )
     vim.keymap.set(
       'n', '<leader>;', function()
-      ui.nav_file(4)
-    end
+        ui.nav_file(4)
+      end
     )
   end,
 }

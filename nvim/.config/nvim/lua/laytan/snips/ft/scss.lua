@@ -9,9 +9,13 @@ local i = ls.insert_node
 local fmt = require('luasnip.extras.fmt').fmt
 
 return {
-  s('!', fmt([[
+  s(
+    '!', fmt(
+      [[
   !important;
   {}
-  ]], { i(0) })),
+  ]], { i(0) }
+    )
+  ),
 }
 

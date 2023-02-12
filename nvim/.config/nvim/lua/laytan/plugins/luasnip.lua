@@ -49,10 +49,10 @@ return {
 
     vim.keymap.set(
       'i', '<c-l>', function()
-      if ls.choice_active() then
-        ls.change_choice(1)
+        if ls.choice_active() then
+          ls.change_choice(1)
+        end
       end
-    end
     )
   end,
 }

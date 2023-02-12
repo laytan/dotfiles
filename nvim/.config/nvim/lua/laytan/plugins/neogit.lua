@@ -1,7 +1,9 @@
 -- Git (my fork of neogit).
 return {
-  'laytan/neogit',
+  '~/projects/neogit',
+  dependencies = { 'sindrets/diffview.nvim' },
   cmd = 'Git',
+  dev = true,
   config = function()
     local neogit = require('neogit')
 
@@ -11,6 +13,7 @@ return {
         disable_builtin_notifications = true,
 
         sections = { recent = { folded = false } },
+        integrations = { diffview = true },
       }
     )
 

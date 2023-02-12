@@ -6,17 +6,17 @@ local repo_pattern = '[^%s]+/[^%s]+'
 
 vim.api.nvim_create_autocmd(
   'Syntax', {
-  pattern = 'glow',
-  callback = function(ctx)
-    vim.schedule(
-      function()
-        vim.api.nvim_buf_set_option(ctx.buf, 'modifiable', true)
-        baleia.once(ctx.buf)
-        vim.api.nvim_buf_set_option(ctx.buf, 'modifiable', false)
-      end
-    )
-  end,
-}
+    pattern = 'glow',
+    callback = function(ctx)
+      vim.schedule(
+        function()
+          vim.api.nvim_buf_set_option(ctx.buf, 'modifiable', true)
+          baleia.once(ctx.buf)
+          vim.api.nvim_buf_set_option(ctx.buf, 'modifiable', false)
+        end
+      )
+    end,
+  }
 )
 
 local function enabled()
@@ -29,7 +29,13 @@ local function execute(done)
   Job:new(
     {
       command = 'glow',
-      args = { 'github.com/' .. repo, '-s', 'dark', '-w', vim.api.nvim_win_get_width(0) },
+      args = {
+        'github.com/' .. repo,
+        '-s',
+        'dark',
+        '-w',
+        vim.api.nvim_win_get_width(0),
+      },
       on_exit = function(job)
         print(job:result())
         done { lines = job:result(), filetype = 'glow' }

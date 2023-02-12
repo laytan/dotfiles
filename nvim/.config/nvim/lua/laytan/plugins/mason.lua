@@ -17,7 +17,7 @@ return {
           'phpstan',
           'php-debug-adapter',
           -- Twig
-          'twigcs',
+          { 'twigcs', version = 'v6.1.0' }, -- 6.1 is the last version with PHP7.4 support.
           -- HTML
           'emmet-ls',
           -- GO

@@ -3,7 +3,6 @@ require('laytan.set')
 require('lazy').setup('laytan.plugins', { checker = { enabled = true } })
 require('laytan.keymaps')
 require('laytan.autocommands')
-require('laytan.drupal')
 require('laytan.git')
 
 vim.api.nvim_create_autocmd(

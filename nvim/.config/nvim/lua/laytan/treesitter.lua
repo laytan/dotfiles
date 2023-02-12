@@ -18,6 +18,10 @@ end
 
 M.iter_captures = function(query, start_row, end_row)
   local curr_node = ts_utils.get_node_at_cursor()
+  if not curr_node then
+    return nil
+  end
+
   local root = ts_utils.get_root_for_node(curr_node)
   return query:iter_captures(root, 0, start_row, end_row)
 end

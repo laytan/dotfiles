@@ -5,6 +5,7 @@ return {
     'kosayoda/nvim-lightbulb', -- Shows a lightbulb on the left if there are code actions for that line.
     { 'j-hui/fidget.nvim', config = { window = { blend = 0 } } }, -- Shows progress and status of LSPs and their actions.
     'nvim-telescope/telescope.nvim', -- Used as picker if there are multiple options.
+    'folke/neodev.nvim',
   },
   event = 'BufReadPre',
   config = function()
@@ -17,10 +18,13 @@ return {
     local util = require('lspconfig.util')
     local config, php_root_dirs = require('laytan.lsp').config,
                                   require('laytan.lsp').php_root_dirs
-    local lsp_time = require('laytan.lsp_time')
 
     require('nvim-lightbulb').setup(
-      { sign = { enabled = true, priority = 100 }, autocmd = { enabled = true } }
+      {
+        virtual_text = { enabled = true },
+        status_text = { enabled = true },
+        autocmd = { enabled = true },
+      }
     )
 
     configs.elephp = {
@@ -50,7 +54,20 @@ return {
       },
     }
 
-    lspconfig.tsserver.setup(config())
+    lspconfig.denols.setup(
+      config(
+        { root_dir = util.root_pattern('deno.json', 'deno.jsonc') }
+      )
+    )
+
+    lspconfig.tsserver.setup(
+      config(
+        {
+          root_dir = util.root_pattern('package.json'),
+          single_file_support = false,
+        }
+      )
+    )
 
     lspconfig.tailwindcss.setup(config())
 
@@ -71,31 +88,18 @@ return {
     lspconfig.sumneko_lua.setup(
       config(
         {
-          settings = {
-            Lua = {
-              runtime = {
-                -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-                version = 'LuaJIT',
-              },
-              diagnostics = {
-                -- Get the language server to recognize the `vim` global
-                globals = { 'vim' },
-              },
-              workspace = {
-                -- Make the server aware of Neovim runtime files
-                library = vim.api.nvim_get_runtime_file('', true),
-              },
-              -- Do not send telemetry data containing a randomized but unique identifier
-              telemetry = { enable = false },
-            },
-          },
+          -- Turn off formatting for this LSP, we are using lua_format from null-ls.
+          on_init = function(client)
+            client.server_capabilities.documentFormattingProvider = false
+            client.server_capabilities.documentRangeFormattingProvider = false
+          end,
         }
       )
     )
 
     lspconfig.emmet_ls.setup(
       config(
-        { filetypes = { 'html', 'twig', 'typescriptreact' } }
+        { filetypes = { 'html', 'twig', 'typescriptreact', 'php' } }
       )
     )
 
@@ -130,9 +134,6 @@ return {
             '-v',
           },
           root_dir = php_root_dirs,
-          handlers = lsp_time.get_handlers(
-            { ['textDocument/hover'] = true, ['textDocument/definition'] = true }
-          ),
         }
       )
     )
@@ -145,10 +146,7 @@ return {
 
     vim.keymap.set(
       'n', '<leader>d', function()
-        lsp_time.signal_start('textDocument/definition')
-
-        -- TODO: can we still use telescope? (lsp_time)
-        vim.lsp.buf.definition()
+        builtin.lsp_definitions()
       end
     )
     vim.keymap.set(

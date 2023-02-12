@@ -10,9 +10,9 @@ return {
       )
 
       vim.api
-          .nvim_buf_set_keymap(bufnr, 'n', '<C-r>', '<cmd>AerialPrev<CR>', {})
+        .nvim_buf_set_keymap(bufnr, 'n', '<C-r>', '<cmd>AerialPrev<CR>', {})
       vim.api
-          .nvim_buf_set_keymap(bufnr, 'n', '<C-t>', '<cmd>AerialNext<CR>', {})
+        .nvim_buf_set_keymap(bufnr, 'n', '<C-t>', '<cmd>AerialNext<CR>', {})
     end
 
     require('aerial').setup(

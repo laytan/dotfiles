@@ -13,6 +13,8 @@ return {
     local format_on_save_enabled = false
     vim.api.nvim_create_user_command(
       'FormatOnSaveToggle', function()
+        require('tailwind-sorter').toggle_on_save()
+
         vim.api.nvim_clear_autocmds({ group = augroup })
         if format_on_save_enabled then
           format_on_save_enabled = false
@@ -22,11 +24,11 @@ return {
         format_on_save_enabled = true
         vim.api.nvim_create_autocmd(
           'BufWritePre', {
-          group = augroup,
-          callback = function()
-            vim.lsp.buf.format()
-          end,
-        }
+            group = augroup,
+            callback = function()
+              vim.lsp.buf.format()
+            end,
+          }
         )
       end, {}
     )
@@ -42,8 +44,7 @@ return {
 
     null.setup(
       {
-        debug = true,
-        root_dir = utils.root_pattern('.null-ls-root', 'Makefile'),
+        root_dir = utils.root_pattern('.null-ls-root', 'Makefile', '.git'),
         diagnostics_format = '[#{s}] #{m} (#{c})',
         default_timeout = 30000,
         sources = {
@@ -75,7 +76,10 @@ return {
           ),
           -- Twig
           diagnostics.twigcs.with(local_composer).with(fmt_no_code).with(
-            { extra_args = { '--twig-version', '2' } }
+            {
+              extra_args = { '--twig-version', '2' },
+              extra_filetypes = { 'php' },
+            }
           ),
           -- GO
           diagnostics.golangci_lint.with(fmt_no_code),
@@ -88,12 +92,13 @@ return {
           diagnostics.hadolint,
 
           -- Formatting
-          --
+          -- A lot
+          formatting.prettierd,
           -- PHP
           formatting.phpcbf.with(local_composer).with(require_phpcs_config)
-              .with(
-                { timeout = 30000 }
-              ),
+            .with(
+            { timeout = 30000 }
+          ),
           -- GO
           formatting.gofumpt,
           formatting.goimports_reviser.with(

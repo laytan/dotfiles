@@ -69,7 +69,7 @@ return {
 
             if entry.source.name == 'cmp_tabnine' then
               if entry.completion_item.data ~= nil and
-                  entry.completion_item.data.detail ~= nil then
+                entry.completion_item.data.detail ~= nil then
                 menu = entry.completion_item.data.detail .. ' ' .. menu
               end
             end
@@ -94,56 +94,50 @@ return {
 
     cmp.setup.filetype(
       { 'sql', 'mysql', 'psql' }, {
-      sources = cmp.config.sources(
-        {
-          { name = 'vim-dadbod-completion' },
-          { name = 'cmp_tabnine' },
-          { name = 'buffer' },
-        }
-      ),
-    }
+        sources = cmp.config.sources(
+          {
+            { name = 'vim-dadbod-completion' },
+            { name = 'cmp_tabnine' },
+            { name = 'buffer' },
+          }
+        ),
+      }
     )
 
     cmp.setup.filetype(
       'gitcommit', {
-      sources = cmp.config.sources(
-        {
-          { name = 'conventionalcommits' },
-          { name = 'jira', keyword_length = 2 },
-        }
-      ),
-    }
+        sources = cmp.config.sources(
+          {
+            { name = 'conventionalcommits' },
+            { name = 'jira', keyword_length = 2 },
+          }
+        ),
+      }
     )
 
     cmp.setup.cmdline(
       ':', {
-      mapping = cmp.mapping.preset.cmdline(),
-      sources = cmp.config.sources(
-        {
-          { name = 'cmdline' },
-          { name = 'cmdline_history' },
-        }
-      ),
-    }
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = cmp.config.sources(
+          { { name = 'cmdline' }, { name = 'cmdline_history' } }
+        ),
+      }
     )
 
     cmp.setup.cmdline(
       '@', {
-      mapping = cmp.mapping.preset.cmdline(),
-      sources = cmp.config.sources(
-        {
-          { name = 'cmdline' },
-          { name = 'cmdline_history' },
-        }
-      ),
-    }
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = cmp.config.sources(
+          { { name = 'cmdline' }, { name = 'cmdline_history' } }
+        ),
+      }
     )
 
     cmp.setup.cmdline(
       '/', {
-      mapping = cmp.mapping.preset.cmdline(),
-      sources = cmp.config.sources({ { name = 'buffer' } }),
-    }
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = cmp.config.sources({ { name = 'buffer' } }),
+      }
     )
 
     require('cmp_jira')

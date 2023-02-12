@@ -9,6 +9,8 @@ export PATH=$HOME/go/bin:$PATH
 export PATH=$HOME/tools:$PATH
 export PATH=$HOME/.local/share/nvim/mason/bin:$PATH
 export PATH=$(pyenv root)/shims:$PATH
+export PATH=$HOME/flutter/bin:$PATH
+export PATH=$HOME/.pub-cache/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
