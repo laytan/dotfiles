@@ -49,6 +49,7 @@ return {
     )
 
     vim.cmd([[hi WinSeparator guifg=#363a4f]])
-
+    vim.cmd([[hi TreesitterContext guibg=#363a4f]])
+    vim.cmd([[hi NormalFloat guibg=#24273a]])
   end,
 }
