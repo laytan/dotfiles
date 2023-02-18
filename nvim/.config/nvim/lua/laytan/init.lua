@@ -1,5 +1,6 @@
 require('laytan.install')
 require('laytan.set')
+require('laytan.statuscol')
 require('lazy').setup('laytan.plugins', { checker = { enabled = true } })
 require('laytan.keymaps')
 require('laytan.autocommands')
