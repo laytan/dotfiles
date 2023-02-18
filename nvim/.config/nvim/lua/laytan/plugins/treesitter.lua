@@ -42,5 +42,10 @@ return {
         },
       }
     )
+
+    require('treesitter-context').setup({
+      enable = true,
+      line_numbers = false,
+    })
   end,
 }
