@@ -17,6 +17,8 @@ return {
 
   { 'lewis6991/gitsigns.nvim', config = true, event = 'BufEnter' },
 
+  { 'm4xshen/smartcolumn.nvim', config = true, event = 'BufEnter' },
+
   {
     'rhysd/git-messenger.vim',
     keys = '<leader>gm',
