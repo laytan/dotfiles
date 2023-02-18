@@ -1,6 +1,7 @@
 -- File tree
 return {
   'kyazdani42/nvim-tree.lua',
+  event = 'VimEnter',
   config = function()
     require('nvim-tree').setup(
       {
@@ -30,6 +31,8 @@ return {
         trash = { cmd = 'trash' },
       }
     )
+
+    require('nvim-tree.api').tree.open()
 
     vim.keymap.set('n', '<leader>T', ':silent :NvimTreeFindFile<cr>')
   end,
