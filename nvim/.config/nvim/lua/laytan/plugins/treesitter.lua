@@ -15,6 +15,33 @@ return {
   config = function()
     require('nvim-treesitter.configs').setup(
       {
+        ensure_installed = {
+          'bash',
+          'css',
+          'dockerfile',
+          'go',
+          'gomod',
+          'help',
+          'html',
+          'javascript',
+          'jsdoc',
+          'json',
+          'lua',
+          'markdown',
+          'markdown_inline',
+          'php',
+          'regex',
+          'scss',
+          'sql',
+          'typescript',
+          'tsx',
+          'vue',
+          'yaml',
+          'make',
+          'python',
+          'twig',
+          'query',
+        },
         highlight = { enable = true },
         playground = { enable = true },
         textobjects = {
@@ -43,9 +70,6 @@ return {
       }
     )
 
-    require('treesitter-context').setup({
-      enable = true,
-      line_numbers = false,
-    })
+    require('treesitter-context').setup({ enable = true, line_numbers = false })
   end,
 }
