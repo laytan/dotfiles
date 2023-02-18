@@ -47,7 +47,9 @@ end
 -- Makes cakephp plugins have the base cake app as their root dir.
 M.php_root_dirs = function(fname)
   local is_drupal_module = util.root_pattern('modules')(fname) ~= nil
-  local is_cake_plugin = util.root_pattern('plugins')(fname) ~= nil
+  local is_plugin = util.root_pattern('plugins')(fname) ~= nil
+  local is_wordpress = util.root_pattern('wp-content')(fname) ~= nil
+  local is_cake_plugin = is_plugin and not is_wordpress
 
   if is_drupal_module then
     return util.root_pattern('web')(fname)
