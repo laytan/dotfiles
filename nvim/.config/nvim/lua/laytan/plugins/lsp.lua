@@ -85,7 +85,7 @@ return {
     --   )
     -- )
 
-    lspconfig.sumneko_lua.setup(
+    lspconfig.lua_ls.setup(
       config(
         {
           -- Turn off formatting for this LSP, we are using lua_format from null-ls.
