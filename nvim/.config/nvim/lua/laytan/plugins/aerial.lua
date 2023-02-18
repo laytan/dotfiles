@@ -18,7 +18,8 @@ return {
     require('aerial').setup(
       {
         on_attach = on_attach,
-        layout = { width = 45 },
+        layout = { max_width = 0.9 },
+        float = { border = 'none' },
         highlight_on_jump = false,
         close_on_select = true,
         close_automatic_events = { 'switch_buffer' },
