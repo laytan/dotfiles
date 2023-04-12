@@ -13,7 +13,7 @@ return {
 
     ls.config.set_config(
       {
-        updateevents = 'TextChanged,TextChangedI',
+        update_events = {'TextChanged', 'TextChangedI'},
         ext_opts = {
           [types.choiceNode] = {
             active = { virt_text = { { icons.get_icon('Rmd'), 'Bold' } } },
