@@ -105,13 +105,45 @@ return {
             }
           end,
         },
+
+        odin = {
+          configured = false,
+          config = function()
+            dap.adapters.codelldb = {
+              type = 'server',
+              port = 1300,
+              executable = {
+                command = "/Users/laytan/codelldb/extension/adapter/codelldb",
+                args = {"--port", "1300"},
+              },
+            }
+
+            dap.configurations.odin = {
+              {
+                name = "Debug Odin",
+                type = "codelldb",
+                request = "launch",
+                program = function ()
+                  return vim.fn.input('Path to executable (compiled with -debug!): ', vim.fn.getcwd() .. '/', 'file')
+                end,
+                cwd = vim.fn.getcwd(),
+                stopOnEntry = false,
+              },
+            }
+          end
+        },
       }
 
       local on_ft = function(ft)
         local curr_ft = filetypes[ft]
         if curr_ft and not curr_ft.configured then
-          vim.notify(
-            'Lazy loading ' .. ft .. ' DAP configuration', vim.log.levels.INFO
+          vim.schedule_wrap(
+            function()
+              vim.notify(
+                'Lazy loading ' .. ft .. ' DAP configuration',
+                vim.log.levels.INFO
+              )
+            end
           )
           curr_ft.config()
           curr_ft.configured = true
