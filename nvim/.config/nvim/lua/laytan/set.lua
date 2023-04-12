@@ -54,3 +54,7 @@ vim.opt.conceallevel = 2
 vim.opt.shortmess:append('s')
 
 vim.opt.splitkeep = 'screen'
+
+vim.opt.foldlevelstart = 99
+vim.opt.foldmethod = 'expr'
+vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
