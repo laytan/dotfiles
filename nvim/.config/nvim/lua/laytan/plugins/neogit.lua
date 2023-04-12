@@ -1,6 +1,5 @@
--- Git (my fork of neogit).
 return {
-  '~/projects/neogit',
+  'TimUntersberger/neogit',
   dependencies = { 'sindrets/diffview.nvim' },
   cmd = 'Git',
   dev = true,
