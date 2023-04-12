@@ -1,6 +1,6 @@
 local ts_utils = require('nvim-treesitter.ts_utils')
 
-M = {}
+local M = {}
 
 M.get_node_text = function(node)
   return vim.treesitter.query.get_node_text(node, 0)
