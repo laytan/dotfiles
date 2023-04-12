@@ -7,13 +7,20 @@ return {
       'theHamsta/nvim-dap-virtual-text', -- Shows information from the debugging session next to code as virtual text.
     },
     keys = {
-      '<leader>bo',
-      '<leader>bc',
-      '<leader>bb',
-      '<leader>bB',
-      '<Right>',
-      '<Up>',
-      '<Down>',
+      {
+        '<leader>bo',
+        function()
+          require('dapui').toggle()
+        end,
+      },
+      { '<leader>bc', ':DapContinue<cr>' },
+      { '<leader>bb', ':DapToggleBreakpoint<cr>' },
+      {
+        '<leader>bB',
+        function()
+          require('dap').toggle_breakpoint(vim.fn.input('[DAP] Condition > '))
+        end,
+      },
     },
     config = function()
       local dap = require('dap')
@@ -35,14 +42,7 @@ return {
         dapui.close({})
       end
 
-      vim.keymap.set('n', '<leader>bo', dapui.toggle)
-      vim.keymap.set('n', '<leader>bc', ':DapContinue<cr>')
-      vim.keymap.set('n', '<leader>bb', ':DapToggleBreakpoint<cr>')
-      vim.keymap.set(
-        'n', '<leader>bB', function()
-          dap.toggle_breakpoint(vim.fn.input('[DAP] Condition > '))
-        end
-      )
+      -- Putting these here so dap doesn't load when these keys are accidentally pressed.
       vim.keymap.set('n', '<Right>', dap.step_over)
       vim.keymap.set('n', '<Up>', dap.step_out)
       vim.keymap.set('n', '<Down>', dap.step_into)
