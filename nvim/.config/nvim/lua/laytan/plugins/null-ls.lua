@@ -35,10 +35,20 @@ return {
 
     local local_composer = { prefer_local = 'vendor/bin' }
     local fmt_no_code = { diagnostics_format = '[#{s}] #{m}' }
-    local diag_on_save = { method = null.methods.DIAGNOSTICS_ON_SAVE }
+    local diag_on_save = {
+      method = null.methods.DIAGNOSTICS_ON_SAVE,
+      to_temp_file = false,
+    }
+
     local require_phpcs_config = {
       condition = function(u)
         return u.root_has_file('phpcs.xml')
+      end,
+    }
+
+    local not_in_php_stubs = {
+      runtime_condition = function(params)
+        return params.lsp_params.textDocument.uri:find('phpstorm%-stubs') == nil
       end,
     }
 
@@ -53,21 +63,23 @@ return {
           -- General
           diagnostics.trail_space.with(fmt_no_code),
           -- PHP
-          diagnostics.phpstan.with(local_composer).with(fmt_no_code).with(
-            {
-              condition = function(u)
-                return u.root_has_file('phpstan.neon')
-              end,
-            }
-          ),
+          -- diagnostics.phpstan.with(not_in_php_stubs).with(local_composer).with(
+          --   fmt_no_code
+          -- ).with(
+          --   {
+          --     condition = function(u)
+          --       return u.root_has_file('phpstan.neon')
+          --     end,
+          --   }
+          -- ),
 
-          diagnostics.phpcs.with(local_composer).with(diag_on_save).with(
-            { extra_args = { '--cache' } }
-          ).with(require_phpcs_config),
+          -- diagnostics.phpcs.with(local_composer).with(diag_on_save).with(
+          --   { extra_args = { '--cache' } }
+          -- ).with(require_phpcs_config),
 
-          diagnostics.phpmd.with(local_composer).with(diag_on_save).with(
-            { extra_args = { 'phpmd.xml' } }
-          ).with(
+          diagnostics.phpmd.with(not_in_php_stubs).with(local_composer).with(
+            diag_on_save
+          ).with({ extra_args = { 'phpmd.xml' } }).with(
             {
               condition = function(u)
                 return u.root_has_file('phpmd.xml')
@@ -76,6 +88,8 @@ return {
           ),
           -- Twig
           diagnostics.twigcs.with(local_composer).with(fmt_no_code).with(
+            diag_on_save
+          ).with(
             {
               extra_args = { '--twig-version', '2' },
               extra_filetypes = { 'php' },
@@ -95,10 +109,10 @@ return {
           -- A lot
           formatting.prettierd,
           -- PHP
-          formatting.phpcbf.with(local_composer).with(require_phpcs_config)
-            .with(
-            { timeout = 30000 }
-          ),
+          -- formatting.phpcbf.with(local_composer).with(require_phpcs_config)
+          --   .with(
+          --   { timeout = 30000 }
+          -- ),
           -- GO
           formatting.gofumpt,
           formatting.goimports_reviser.with(

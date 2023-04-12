@@ -51,6 +51,10 @@ M.php_root_dirs = function(fname)
   local is_wordpress = util.root_pattern('wp-content')(fname) ~= nil
   local is_cake_plugin = is_plugin and not is_wordpress
 
+  if is_wordpress then
+    return util.root_pattern('wp-content')(fname)
+  end
+
   if is_drupal_module then
     return util.root_pattern('web')(fname)
   end

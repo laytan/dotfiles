@@ -29,7 +29,7 @@ return {
 
     configs.elephp = {
       default_config = {
-        cmd = { 'elephp', '--stdio' },
+        cmd = { 'elephp' },
         filetypes = { 'php' },
         root_dir = function(pattern)
           local cwd = vim.loop.cwd()
@@ -124,14 +124,8 @@ return {
         {
           cmd = {
             'elephp',
-            '--stdio',
-            '-e php',
-            '-e module',
-            '-e install',
-            '-e theme',
-            '-e sfc',
-            '-e inc',
-            '-v',
+            '-extensions=.php,.module,.install,.theme,.sfc,.inc',
+            '-statsviz.enabled=true',
           },
           root_dir = php_root_dirs,
         }
