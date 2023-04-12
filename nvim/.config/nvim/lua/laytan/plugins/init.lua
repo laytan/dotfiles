@@ -65,7 +65,10 @@ return {
   { 'kylechui/nvim-surround', event = 'VeryLazy', config = true },
 
   -- Put but without clearing put register.
-  { 'vim-scripts/ReplaceWithRegister', event = 'VeryLazy' },
+  {
+    'vim-scripts/ReplaceWithRegister',
+    keys = { { 'gr', nil, 'x' }, 'gr', 'grr' },
+  },
 
   -- Quickly spin up a local server for files.
   {
