@@ -1,5 +1,7 @@
 vim.g.mapleader = ' '
 vim.g.cursorhold_updatetime = 500
+vim.g.loaded_netrw = false
+vim.g.loaded_netrwPlugin = false
 
 vim.opt.encoding = 'UTF-8'
 
