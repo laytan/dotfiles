@@ -99,7 +99,7 @@ end
 
 -- Query to resolve the result of a function,
 -- this is "(types...)" or (if only one return) the type directly.
-vim.treesitter.query.set_query(
+vim.treesitter.query.set(
   'go', 'LuaSnip_Result_Function', [[ [
     (function_declaration result: (_) @result)
   ] ]]
@@ -125,7 +125,7 @@ local default_values = {
 
 local function outer_returns()
   -- Go up using the result query defined above.
-  local query = vim.treesitter.query.get_query('go', 'LuaSnip_Result_Function')
+  local query = vim.treesitter.query.get('go', 'LuaSnip_Result_Function')
   for _, node in ts_utils.iter_captures_up(query) do
     local text = ts_utils.get_node_text(node)
     if text == nil then

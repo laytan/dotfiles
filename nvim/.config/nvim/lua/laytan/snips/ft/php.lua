@@ -20,7 +20,7 @@ local function remove_static_class(class)
   return var_name or ''
 end
 
-vim.treesitter.set_query(
+vim.treesitter.query.set(
   'php', 'LuaSnip_Result_Namespaces', [[ [
     (namespace_use_clause
       (qualified_name) @used_namespace)
@@ -34,7 +34,7 @@ local function get_namespace(class)
   class = class or ''
   local file_namespace = ''
 
-  local query = vim.treesitter.get_query('php', 'LuaSnip_Result_Namespaces')
+  local query = vim.treesitter.query.get('php', 'LuaSnip_Result_Namespaces')
   for id, node in ts_utils.iter_captures_up(query) do
     local name = query.captures[id]
     local text = ts_utils.get_node_text(node)
