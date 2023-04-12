@@ -6,14 +6,13 @@ return {
     'hrsh7th/cmp-nvim-lsp', -- Provides LSP completions.
     'hrsh7th/cmp-buffer', -- Provides completions for symbols in the same buffer.
     'hrsh7th/cmp-path', -- Provides completions for paths on the system.
-    'hrsh7th/cmp-cmdline', -- Provides completions for cmdline (':Command') commands.
     'davidsierradz/cmp-conventionalcommits', -- Provides completions for conventional commits symbols.
     { 'tzachar/cmp-tabnine', build = './install.sh' }, -- Provides completions using the Tabnine AI service.
     'kristijanhusak/vim-dadbod-completion', -- Completes db symbols using dadbod.
     { 'saadparwaiz1/cmp_luasnip', dependencies = { 'L3MON4D3/LuaSnip' } }, -- Integrates snippet completion using LuaSnip.
     'onsails/lspkind.nvim', -- Used for nice icons in completion menu (class, function, package, etc.).
   },
-  event = { 'InsertEnter', 'CmdlineEnter' },
+  event = { 'InsertEnter' },
   config = function()
     local cmp = require('cmp')
     local luasnip = require('luasnip')
@@ -40,8 +39,6 @@ return {
       ['vim-dadbod-completion'] = '[DB]',
       jira = '[Jira]',
       conventionalcommits = '[Commy]',
-      cmdline = '[Cmd]',
-      cmdline_history = '[<-Cmd]',
     }
 
     cmp.setup(
@@ -109,34 +106,9 @@ return {
         sources = cmp.config.sources(
           {
             { name = 'conventionalcommits' },
-            { name = 'jira', keyword_length = 2 },
+            { name = 'jira' },
           }
         ),
-      }
-    )
-
-    cmp.setup.cmdline(
-      ':', {
-        mapping = cmp.mapping.preset.cmdline(),
-        sources = cmp.config.sources(
-          { { name = 'cmdline' }, { name = 'cmdline_history' } }
-        ),
-      }
-    )
-
-    cmp.setup.cmdline(
-      '@', {
-        mapping = cmp.mapping.preset.cmdline(),
-        sources = cmp.config.sources(
-          { { name = 'cmdline' }, { name = 'cmdline_history' } }
-        ),
-      }
-    )
-
-    cmp.setup.cmdline(
-      '/', {
-        mapping = cmp.mapping.preset.cmdline(),
-        sources = cmp.config.sources({ { name = 'buffer' } }),
       }
     )
 
