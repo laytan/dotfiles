@@ -52,6 +52,8 @@ return {
           'terraform-ls',
           -- Yaml
           'yaml-language-server',
+          -- Odin
+          'ols',
         },
       }
     )

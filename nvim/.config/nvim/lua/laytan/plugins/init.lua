@@ -5,6 +5,8 @@ return {
 
   { 'folke/neodev.nvim', lazy = true, config = true },
 
+  { 'Tetralux/odin.vim', ft = 'odin' },
+
   -- Pretty vim.notify output.
   {
     'rcarriga/nvim-notify',

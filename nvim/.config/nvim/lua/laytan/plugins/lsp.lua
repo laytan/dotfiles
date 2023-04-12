@@ -144,6 +144,9 @@ return {
 
     lspconfig.yamlls.setup({})
 
+    -- Odin
+    lspconfig.ols.setup({})
+
     vim.keymap.set(
       'n', '<leader>d', function()
         builtin.lsp_definitions()

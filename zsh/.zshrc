@@ -12,6 +12,10 @@ export PATH=$(pyenv root)/shims:$PATH
 export PATH=$HOME/flutter/bin:$PATH
 export PATH=$HOME/.pub-cache/bin:$PATH
 
+# Odin
+export PATH=/opt/homebrew/opt/llvm@11/bin:$PATH
+export PATH=$HOME/Odin:$PATH
+
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
