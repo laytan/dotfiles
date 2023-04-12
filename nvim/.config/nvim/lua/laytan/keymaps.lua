@@ -21,3 +21,6 @@ vim.keymap.set('n', '<C-u>', '<C-u>zz')
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
 
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>')
+
+vim.keymap.set('n', '<C-q>', '<cmd>:w<cr><cmd>:cnext<cr>')
+vim.keymap.set('n', '<C-Q>', '<cmd>:cprev<cr>')
