@@ -26,7 +26,7 @@ return {
     local function transform_kind(kind)
       local icon = lspkind.presets.default[kind]
       local abbr = kind:gsub('[aeiou]', ''):sub(0, 3)
-      return icon .. ' ' .. abbr
+      return (icon or '') .. ' ' .. abbr
     end
 
     tabnine:setup({ show_prediction_strength = true })
