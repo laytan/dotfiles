@@ -145,8 +145,6 @@ if [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/google-cloud-sdk/
 # The next line enables shell command completion for gcloud.
 if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/google-cloud-sdk/completion.zsh.inc"; fi
 
-export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
-
 jira completion zsh > "${fpath[1]}/_jira"
 autoload -U compinit; compinit
 
