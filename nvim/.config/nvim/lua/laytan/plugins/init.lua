@@ -24,16 +24,6 @@ return {
   { 'm4xshen/smartcolumn.nvim', config = true, event = 'BufEnter' },
 
   {
-    'rhysd/git-messenger.vim',
-    keys = '<leader>gm',
-    cmd = 'GitMessenger',
-    config = function()
-      vim.g.git_messenger_always_into_popup = true
-    end,
-  },
-
-  -- Undo navigation.
-  {
     'mbbill/undotree',
     keys = '<leader>u',
     config = function()
@@ -41,10 +31,8 @@ return {
     end,
   },
 
-  -- Better and language aware commenting.
   { 'numToStr/Comment.nvim', event = 'BufEnter', config = true },
 
-  -- Live preview markdown.
   {
     'iamcco/markdown-preview.nvim',
     build = function()
@@ -96,20 +84,4 @@ return {
       },
     },
   },
-
-  -- Colors text that resolves to a color in that color (works with Sass variables).
-  {
-    'NvChad/nvim-colorizer.lua',
-    event = 'BufEnter',
-    opts = {
-      user_default_options = {
-        rgb_fn = true,
-        hsl_fn = true,
-        tailwind = 'lsp',
-        sass = { enable = true },
-      },
-    },
-  },
-
-  { 'shortcuts/no-neck-pain.nvim', version = '*', event = 'CmdlineEnter' },
 }
