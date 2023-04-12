@@ -10,6 +10,7 @@ return {
       dependencies = { 'kkharji/sqlite.lua' },
       config = {},
     },
+    'jedrzejboczar/possession.nvim',
   },
   -- NOTE: telescope handles vim.ui.select, I did not find a way to have it
   -- lazy load when that is called, so this seems the best we can do.
@@ -60,9 +61,11 @@ return {
         },
       }
     )
+
     telescope.load_extension('fzf')
     telescope.load_extension('ui-select')
     telescope.load_extension('live_grep_args')
+    telescope.load_extension('possession')
 
     local cakeroutes = require('cakeroutes')
     cakeroutes.setup()
