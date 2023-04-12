@@ -136,7 +136,13 @@ return {
 
     lspconfig.terraformls.setup({})
 
-    lspconfig.yamlls.setup({})
+    lspconfig.yamlls.setup({
+      settings = {
+        yaml = {
+          keyOrdering = false,
+        },
+      },
+    })
 
     -- Odin
     lspconfig.ols.setup({})
