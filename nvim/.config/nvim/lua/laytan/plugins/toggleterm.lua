@@ -9,7 +9,6 @@ return {
         ray:toggle()
       end,
     },
-    { '<leader>tt', '<cmd>ToggleTerm<cr>' },
   },
   config = function()
     require('toggleterm').setup({ start_in_insert = false, hide_numbers = true })

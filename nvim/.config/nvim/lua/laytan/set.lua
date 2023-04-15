@@ -46,7 +46,7 @@ vim.opt.termguicolors = true
 vim.opt.spell = true
 vim.opt.spelloptions = 'camel,noplainbuffer'
 
-vim.opt.cmdheight = 0
+vim.opt.cmdheight = 1
 vim.opt.laststatus = 3
 
 vim.opt.conceallevel = 2

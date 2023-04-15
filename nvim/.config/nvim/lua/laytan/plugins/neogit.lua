@@ -1,9 +1,11 @@
 return {
-  'TimUntersberger/neogit',
+  'CKolkey/neogit',
   dependencies = { 'sindrets/diffview.nvim' },
   cmd = 'Git',
-  dev = true,
   config = function()
+    -- vim.env.NEOGIT_LOG_CONSOLE = true
+    -- vim.env.NEOGIT_LOG_LEVEL = 'debug'
+    --
     local neogit = require('neogit')
 
     neogit.setup(
@@ -12,7 +14,7 @@ return {
         disable_builtin_notifications = true,
 
         sections = { recent = { folded = false } },
-        integrations = { diffview = true },
+        integrations = { diffview = true, telescope = true },
       }
     )
 

@@ -27,9 +27,10 @@ return {
       }
     )
 
-    configs.elephp = {
+    -- TODO: add to lspconfig repo.
+    configs.phpls = {
       default_config = {
-        cmd = { 'elephp' },
+        cmd = { 'phpls' },
         filetypes = { 'php' },
         root_dir = function(pattern)
           local cwd = vim.loop.cwd()
@@ -65,11 +66,19 @@ return {
         {
           root_dir = util.root_pattern('package.json'),
           single_file_support = false,
+
+          -- Turn off formatting, we have prettier and eslint for that.
+          on_init = function(client)
+            client.server_capabilities.documentFormattingProvider = false
+            client.server_capabilities.documentRangeFormattingProvider = false
+          end,
         }
       )
     )
 
-    lspconfig.tailwindcss.setup(config())
+    lspconfig.tailwindcss.setup(config({
+      root_dir = util.root_pattern('tailwind.config.js', 'tailwind.config.ts'),
+    }))
 
     lspconfig.volar.setup(config())
 
@@ -99,7 +108,10 @@ return {
 
     lspconfig.emmet_ls.setup(
       config(
-        { filetypes = { 'html', 'twig', 'typescriptreact', 'php' } }
+        {
+          autostart = false,
+          filetypes = { 'html', 'twig', 'typescriptreact', 'php' },
+        }
       )
     )
 
@@ -119,11 +131,11 @@ return {
     --   )
     -- )
 
-    lspconfig.elephp.setup(
+    lspconfig.phpls.setup(
       config(
         {
           cmd = {
-            'elephp',
+            'phpls',
             '-extensions=.php,.module,.install,.theme,.sfc,.inc',
             '-statsviz.enabled=true',
           },
@@ -136,13 +148,7 @@ return {
 
     lspconfig.terraformls.setup({})
 
-    lspconfig.yamlls.setup({
-      settings = {
-        yaml = {
-          keyOrdering = false,
-        },
-      },
-    })
+    lspconfig.yamlls.setup({ settings = { yaml = { keyOrdering = false } } })
 
     -- Odin
     lspconfig.ols.setup({})
