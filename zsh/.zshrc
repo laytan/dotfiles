@@ -2,13 +2,13 @@
 
 export PATH=$HOME/bin:$PATH
 export PATH=/usr/local/bin:$PATH
+export PATH=$HOME/.local/bin:$PATH
 export PATH=$HOME/.composer/vendor/bin:$PATH
 export PATH=/Library/Frameworks/Mono.framework/Versions/Current/Commands:$PATH
 export PATH=$HOME/.dotnet/tools:$PATH
 export PATH=$HOME/go/bin:$PATH
 export PATH=$HOME/tools:$PATH
 export PATH=$HOME/.local/share/nvim/mason/bin:$PATH
-export PATH=$(pyenv root)/shims:$PATH
 export PATH=$HOME/flutter/bin:$PATH
 export PATH=$HOME/.pub-cache/bin:$PATH
 
@@ -145,11 +145,6 @@ if [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/google-cloud-sdk/
 # The next line enables shell command completion for gcloud.
 if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/google-cloud-sdk/completion.zsh.inc"; fi
 
-jira completion zsh > "${fpath[1]}/_jira"
-autoload -U compinit; compinit
-
-source "$HOME/.work"
-
-. /opt/homebrew/opt/asdf/libexec/asdf.sh
+[ -f "/opt/homebrew/opt/asdf/libexec/asdf.sh" ] && . /opt/homebrew/opt/asdf/libexec/asdf.sh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
