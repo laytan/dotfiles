@@ -3,7 +3,7 @@ return {
   'neovim/nvim-lspconfig', -- Standard configuration for most LSPs.
   dependencies = {
     'kosayoda/nvim-lightbulb', -- Shows a lightbulb on the left if there are code actions for that line.
-    { 'j-hui/fidget.nvim', config = { window = { blend = 0 } } }, -- Shows progress and status of LSPs and their actions.
+    { 'j-hui/fidget.nvim', tag = 'legacy', config = { window = { blend = 0 } } }, -- Shows progress and status of LSPs and their actions.
     'nvim-telescope/telescope.nvim', -- Used as picker if there are multiple options.
     'folke/neodev.nvim',
   },
