@@ -10,7 +10,6 @@ return {
 
     catppuccin.setup(
       {
-        transparent_background = true,
         compile = { enabled = true },
         integrations = {
           aerial = true,
@@ -51,5 +50,6 @@ return {
     vim.cmd([[hi WinSeparator guifg=#363a4f]])
     vim.cmd([[hi TreesitterContext guibg=#363a4f]])
     vim.cmd([[hi NormalFloat guibg=#24273a]])
+    vim.cmd([[hi Normal guibg=#1E1E2E]])
   end,
 }
