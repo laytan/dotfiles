@@ -15,8 +15,6 @@ return {
               cond = require('lazy.status').has_updates,
               color = { fg = '#ff9e64' },
             },
-            -- Only shows overseer if it is loaded. TODO: this still loads overseer on first load.
-            -- { 'overseer', cond = function() return vim.fn.exists(':OverseerInfo') > 0 end },
             'filetype',
           },
           lualine_y = { search, 'progress' },

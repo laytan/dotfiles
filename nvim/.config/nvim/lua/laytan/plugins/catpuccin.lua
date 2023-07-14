@@ -17,7 +17,6 @@ return {
           fidget = true,
           notify = true,
           nvimtree = true,
-          overseer = true,
           telescope = true,
           treesitter = true,
           treesitter_context = true,
