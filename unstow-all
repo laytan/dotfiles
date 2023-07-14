@@ -16,3 +16,4 @@ stow -D nvim
 stow -D skhd
 stow -D yabai
 stow -D zsh
+stow -D tmux
