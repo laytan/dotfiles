@@ -8,7 +8,7 @@ return {
     {
       'prochri/telescope-all-recent.nvim',
       dependencies = { 'kkharji/sqlite.lua' },
-      config = {},
+      config = true,
     },
     'jedrzejboczar/possession.nvim',
   },

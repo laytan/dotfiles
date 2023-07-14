@@ -21,7 +21,11 @@ return {
 
   { 'lewis6991/gitsigns.nvim', config = true, event = 'BufEnter' },
 
-  { 'm4xshen/smartcolumn.nvim', opts = { colorcolumn = '100' }, event = 'BufEnter' },
+  {
+    'm4xshen/smartcolumn.nvim',
+    opts = { colorcolumn = '100' },
+    event = 'BufEnter',
+  },
 
   {
     'mbbill/undotree',

@@ -2,8 +2,15 @@
 return {
   'neovim/nvim-lspconfig', -- Standard configuration for most LSPs.
   dependencies = {
-    'kosayoda/nvim-lightbulb', -- Shows a lightbulb on the left if there are code actions for that line.
-    { 'j-hui/fidget.nvim', tag = 'legacy', config = { window = { blend = 0 } } }, -- Shows progress and status of LSPs and their actions.
+    {
+      'kosayoda/nvim-lightbulb',
+      opts = {
+        virtual_text = { enabled = true },
+        status_text = { enabled = true },
+        autocmd = { enabled = true },
+      },
+    }, -- Shows a lightbulb on the left if there are code actions for that line.
+    { 'j-hui/fidget.nvim', tag = 'legacy', opts = { window = { blend = 0 } } }, -- Shows progress and status of LSPs and their actions.
     'nvim-telescope/telescope.nvim', -- Used as picker if there are multiple options.
     'folke/neodev.nvim',
   },
@@ -18,14 +25,6 @@ return {
     local util = require('lspconfig.util')
     local config, php_root_dirs = require('laytan.lsp').config,
                                   require('laytan.lsp').php_root_dirs
-
-    require('nvim-lightbulb').setup(
-      {
-        virtual_text = { enabled = true },
-        status_text = { enabled = true },
-        autocmd = { enabled = true },
-      }
-    )
 
     -- TODO: add to lspconfig repo.
     configs.phpls = {
