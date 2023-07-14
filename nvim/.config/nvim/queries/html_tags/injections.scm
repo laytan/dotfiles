@@ -1,16 +1,17 @@
 ;; extends
 
 ; <template lang="twig"> treated as TWIG.
-(element
-  (start_tag
-    (tag_name) @_tag (#eq? @_tag "template")
-    (attribute
-      (attribute_name) @_aname (#eq? @_aname "lang")
-      (quoted_attribute_value
-        (attribute_value) @_aval (#eq? @_aval "twig"))
-    )
-  )
-) @twig
+; TODO: doesn't work anymore for some reason (stack overflow).
+; (element
+;   (start_tag
+;     (tag_name) @_tag (#eq? @_tag "template")
+;     (attribute
+;       (attribute_name) @_aname (#eq? @_aname "lang")
+;       (quoted_attribute_value
+;         (attribute_value) @_aval (#eq? @_aval "twig"))
+;     )
+;   )
+; ) @twig
 
 ; ALPINEJS
 (attribute
