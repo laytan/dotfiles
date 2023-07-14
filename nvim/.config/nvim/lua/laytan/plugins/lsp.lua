@@ -75,9 +75,15 @@ return {
       )
     )
 
-    lspconfig.tailwindcss.setup(config({
-      root_dir = util.root_pattern('tailwind.config.js', 'tailwind.config.ts'),
-    }))
+    lspconfig.tailwindcss.setup(
+      config(
+        {
+          root_dir = util.root_pattern(
+            'tailwind.config.js', 'tailwind.config.ts'
+          ),
+        }
+      )
+    )
 
     lspconfig.volar.setup(config())
 
@@ -113,6 +119,8 @@ return {
         }
       )
     )
+
+    lspconfig.ocamllsp.setup(config())
 
     -- lspconfig.phpactor.setup(
     --   config(
@@ -151,6 +159,8 @@ return {
 
     -- Odin
     lspconfig.ols.setup({})
+
+    lspconfig.clangd.setup({})
 
     vim.keymap.set(
       'n', '<leader>d', function()

@@ -1,5 +1,6 @@
 return {
-  'CKolkey/neogit',
+  'TimUntersberger/neogit',
+  -- 'CKolkey/neogit',
   dependencies = { 'sindrets/diffview.nvim' },
   cmd = 'Git',
   config = function()

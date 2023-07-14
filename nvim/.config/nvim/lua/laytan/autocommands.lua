@@ -34,6 +34,11 @@ vim.api.nvim_create_autocmd(
 )
 
 vim.api.nvim_create_autocmd(
+  'BufEnter',
+  { group = group, pattern = '*.sfc', command = 'setlocal filetype=php' }
+)
+
+vim.api.nvim_create_autocmd(
   'BufEnter', {
     group = group,
     pattern = { '*.jpg', '*.jpeg', '*.png' },

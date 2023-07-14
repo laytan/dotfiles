@@ -52,6 +52,8 @@ return {
       end,
     }
 
+    return
+
     null.setup(
       {
         root_dir = utils.root_pattern('.null-ls-root', 'Makefile', '.git'),

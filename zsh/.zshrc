@@ -13,7 +13,6 @@ export PATH=$HOME/flutter/bin:$PATH
 export PATH=$HOME/.pub-cache/bin:$PATH
 
 # Odin
-export PATH=/opt/homebrew/opt/llvm@11/bin:$PATH
 export PATH=$HOME/Odin:$PATH
 
 # Path to your oh-my-zsh installation.
@@ -123,9 +122,6 @@ alias drush="vendor/bin/drush"
 alias sail="vendor/bin/sail"
 alias cat="bat"
 
-# NVIM
-alias v="nvim ."
-alias vi="nvim"
 alias update-nvim-stable='asdf uninstall neovim stable && asdf install neovim stable'
 alias update-nvim-nightly='asdf uninstall neovim nightly && asdf install neovim nightly'
 alias update-nvim-master='asdf uninstall neovim ref:master && asdf install neovim ref:master'
@@ -147,4 +143,16 @@ if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/google-clou
 
 [ -f "/opt/homebrew/opt/asdf/libexec/asdf.sh" ] && . /opt/homebrew/opt/asdf/libexec/asdf.sh
 
+jira completion zsh > "${fpath[1]}/_jira"
+autoload -U compinit; compinit
+
+bindkey -v
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# opam configuration
+[[ ! -r ~/.opam/opam-init/init.zsh ]] || source ~/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
+
+[ -f ~/.work ] && source ~/.work
+
+export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
