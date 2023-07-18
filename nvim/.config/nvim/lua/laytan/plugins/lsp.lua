@@ -189,5 +189,53 @@ return {
         vim.lsp.buf.format({ async = true })
       end
     )
+
+    local timeout = require('laytan.timeout')
+
+    local focus_group = vim.api.nvim_create_augroup('lsp_focus_track', {})
+    local focus_timeout = nil
+    local lsp_stopped = false
+    vim.api.nvim_create_autocmd(
+      'FocusLost', {
+        group = focus_group,
+        callback = function()
+          if focus_timeout ~= nil then
+            return
+          end
+
+          focus_timeout = timeout.set(
+            5 * 60 * 1000, vim.schedule_wrap(
+              function()
+                focus_timeout = nil
+                print('Focus lost for 5 minutes, stopping LSP to free resources')
+                vim.cmd(':LspStop')
+                lsp_stopped = true
+              end
+            )
+          )
+        end,
+      }
+    )
+
+    vim.api.nvim_create_autocmd(
+      'FocusGained', {
+        group = focus_group,
+        callback = function()
+          if focus_timeout ~= nil then
+            timeout.clear(focus_timeout)
+            focus_timeout = nil
+          end
+
+          if lsp_stopped then
+            print(
+              'Focus gained after LSP was stopped after inactivity, starting LSP again'
+            )
+            vim.cmd(':LspStart')
+            lsp_stopped = false
+          end
+        end,
+      }
+    )
+
   end,
 }
