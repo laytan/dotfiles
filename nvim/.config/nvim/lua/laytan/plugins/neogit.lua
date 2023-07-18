@@ -1,7 +1,6 @@
 return {
-  'TimUntersberger/neogit',
-  -- 'CKolkey/neogit',
-  dependencies = { 'sindrets/diffview.nvim' },
+  'NeogitOrg/neogit',
+  dependencies = { 'sindrets/diffview.nvim', 'nvim-lua/plenary.nvim' },
   cmd = 'Git',
   config = function()
     -- vim.env.NEOGIT_LOG_CONSOLE = true
@@ -11,8 +10,9 @@ return {
 
     neogit.setup(
       {
-        disable_context_highlighting = true,
-        disable_builtin_notifications = true,
+        -- disable_context_highlighting = true,
+        -- disable_builtin_notifications = true,
+        disable_commit_confirmation = true,
 
         sections = { recent = { folded = false } },
         integrations = { diffview = true, telescope = true },
@@ -21,7 +21,7 @@ return {
 
     vim.api.nvim_create_user_command(
       'Git', function()
-        neogit.open()
+        neogit.open({ kind = 'split' })
       end, {}
     )
   end,
