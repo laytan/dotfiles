@@ -35,9 +35,7 @@ M.config = function(_config, on_attach)
 
   return vim.tbl_deep_extend(
     'keep', {
-      capabilities = require('cmp_nvim_lsp').default_capabilities(
-        vim.lsp.protocol.make_client_capabilities()
-      ),
+      capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities),
       on_attach = dec_on_attach,
     }, _config or {}
   )

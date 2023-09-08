@@ -3,7 +3,6 @@ return {
   'nvim-telescope/telescope.nvim',
   dependencies = {
     'nvim-telescope/telescope-ui-select.nvim',
-    'nvim-telescope/telescope-live-grep-args.nvim',
     { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
     {
       'prochri/telescope-all-recent.nvim',
@@ -20,7 +19,6 @@ return {
     local builtin = require('telescope.builtin')
     local themes = require('telescope.themes')
     local actions = require('telescope.actions')
-    local lga_actions = require('telescope-live-grep-args.actions')
 
     local theme = function(opts)
       opts = opts or {}
@@ -46,10 +44,6 @@ return {
       {
         extensions = {
           ['ui-select'] = { theme() },
-          live_grep_args = {
-            default_mappings = {},
-            mappings = { i = { ['<C-e>'] = lga_actions.quote_prompt() } },
-          },
         },
         defaults = {
           mappings = {
@@ -64,26 +58,17 @@ return {
 
     telescope.load_extension('fzf')
     telescope.load_extension('ui-select')
-    telescope.load_extension('live_grep_args')
     telescope.load_extension('possession')
-
-    local cakeroutes = require('cakeroutes')
-    cakeroutes.setup()
-    vim.keymap.set(
-      'n', '<leader>tcr', function()
-        cakeroutes.picker()
-      end
-    )
 
     vim.keymap.set(
       'n', '<leader>ps', function()
-        telescope.extensions.live_grep_args.live_grep_args(theme())
+        builtin.live_grep(theme())
       end
     )
 
     vim.keymap.set(
       'n', '<leader>fps', function()
-        telescope.extensions.live_grep_args.live_grep_args(
+        builtin.live_grep(
           theme(
             {
               vimgrep_arguments = {
@@ -95,8 +80,6 @@ return {
                 '--column',
                 '--smart-case',
                 '-uu',
-                '--glob',
-                '!clockwork/*',
                 '--glob',
                 '!.git/*',
               },
@@ -131,7 +114,7 @@ return {
     )
 
     vim.keymap.set(
-      'n', '<leader>ot', function()
+      'n', '<leader>ob', function()
         builtin.buffers(theme())
       end
     )

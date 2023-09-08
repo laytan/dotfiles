@@ -16,7 +16,7 @@ local function load_session()
   local p = require('possession')
   local session = cwd_session()
   if session == nil then
-    vim.notify('No session matching cwd found', vim.log.levels.INFO)
+    vim.notify('No session matching cwd found', vim.log.levels.DEBUG)
     return
   end
 

@@ -2,6 +2,7 @@ return {
   'NeogitOrg/neogit',
   dependencies = { 'sindrets/diffview.nvim', 'nvim-lua/plenary.nvim' },
   cmd = 'Git',
+  keys = {{ '<leader>gg', ':silent :Git<cr>' }},
   config = function()
     -- vim.env.NEOGIT_LOG_CONSOLE = true
     -- vim.env.NEOGIT_LOG_LEVEL = 'debug'

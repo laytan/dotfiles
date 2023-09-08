@@ -1,8 +1,8 @@
 local vim_highlight = require('vim.highlight')
 
--- TODO: convert to lua
+-- TODO: convert to lua, support linux
 local function openImage()
-  vim.api.nvim_exec(
+  vim.api.nvim_exec2(
     [[
       fu! StartsWith(longer, shorter) abort
           if a:shorter == ''

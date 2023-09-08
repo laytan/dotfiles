@@ -2,14 +2,13 @@
 return {
   'neovim/nvim-lspconfig', -- Standard configuration for most LSPs.
   dependencies = {
-    {
-      'kosayoda/nvim-lightbulb',
-      opts = {
-        virtual_text = { enabled = true },
-        status_text = { enabled = true },
-        autocmd = { enabled = true },
-      },
-    }, -- Shows a lightbulb on the left if there are code actions for that line.
+    -- big error {
+    --   'kosayoda/nvim-lightbulb',
+    --   opts = {
+    --     virtual_text = { enabled = true },
+    --     autocmd      = { enabled = true },
+    --   },
+    -- }, -- Shows a lightbulb on the left if there are code actions for that line.
     { 'j-hui/fidget.nvim', tag = 'legacy', opts = { window = { blend = 0 } } }, -- Shows progress and status of LSPs and their actions.
     'nvim-telescope/telescope.nvim', -- Used as picker if there are multiple options.
     'folke/neodev.nvim',
@@ -25,6 +24,30 @@ return {
     local util = require('lspconfig.util')
     local config, php_root_dirs = require('laytan.lsp').config,
                                   require('laytan.lsp').php_root_dirs
+
+    local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
+    local format_on_save_enabled = false
+    vim.api.nvim_create_user_command(
+      'FormatOnSaveToggle', function()
+        require('tailwind-sorter').toggle_on_save()
+
+        vim.api.nvim_clear_autocmds({ group = augroup })
+        if format_on_save_enabled then
+          format_on_save_enabled = false
+          return
+        end
+
+        format_on_save_enabled = true
+        vim.api.nvim_create_autocmd(
+          'BufWritePre', {
+            group = augroup,
+            callback = function()
+              vim.lsp.buf.format()
+            end,
+          }
+        )
+      end, {}
+    )
 
     -- TODO: add to lspconfig repo.
     configs.phpls = {
@@ -107,6 +130,11 @@ return {
             client.server_capabilities.documentFormattingProvider = false
             client.server_capabilities.documentRangeFormattingProvider = false
           end,
+          settings = {
+            workspace = {
+              checkThirdParty = false,
+            },
+          },
         }
       )
     )
@@ -153,14 +181,22 @@ return {
 
     lspconfig.gopls.setup(config({}))
 
-    lspconfig.terraformls.setup({})
+    lspconfig.terraformls.setup(config({}))
 
-    lspconfig.yamlls.setup({ settings = { yaml = { keyOrdering = false } } })
+    lspconfig.yamlls.setup(
+      config(
+        { settings = { yaml = { keyOrdering = false } } }
+      )
+    )
 
     -- Odin
-    lspconfig.ols.setup({})
+    lspconfig.ols.setup(config({}))
 
-    lspconfig.clangd.setup({})
+    lspconfig.clangd.setup(
+      config(
+        { capabilities = { offsetEncoding = { 'utf-16', 'utf-8' } } }
+      )
+    )
 
     vim.keymap.set(
       'n', '<leader>d', function()

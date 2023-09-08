@@ -22,7 +22,7 @@ vim.keymap.set('n', '<C-d>', '<C-d>zz')
 
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>')
 
-vim.keymap.set('n', '<C-m>', '<cmd>:w<cr><cmd>:cnext<cr>')
+vim.keymap.set('n', '<C-m>', '<cmd>:cnext<cr>')
 vim.keymap.set('n', '<C-n>', '<cmd>:cprev<cr>')
 
 -- Open URL under cursor.

@@ -66,9 +66,18 @@ return {
         { text = '◆', texthl = 'DapLogPoint', linehl = '', numhl = '' }
       )
 
+      local codelldb = {
+        type = 'server',
+        port = 1300,
+        executable = {
+          command = '/Users/laytan/codelldb/extension/adapter/codelldb',
+          args = { '--port', '1300' },
+        },
+      }
       -- Map of configuration per filetype, this lazy loads, so we don't load
       -- each dap adapter/language when we run.
       local filetypes = {
+
         python = {
           configured = false,
           config = function()
@@ -109,28 +118,51 @@ return {
         odin = {
           configured = false,
           config = function()
-            dap.adapters.codelldb = {
-              type = 'server',
-              port = 1300,
-              executable = {
-                command = "/Users/laytan/codelldb/extension/adapter/codelldb",
-                args = {"--port", "1300"},
-              },
-            }
+            dap.adapters.codelldb = codelldb
 
             dap.configurations.odin = {
               {
-                name = "Debug Odin",
-                type = "codelldb",
-                request = "launch",
-                program = function ()
-                  return vim.fn.input('Path to executable (compiled with -debug!): ', vim.fn.getcwd() .. '/', 'file')
+                name = 'Debug Odin',
+                type = 'codelldb',
+                request = 'launch',
+                program = function()
+                  return vim.fn.input(
+                    'Path to executable (compiled with -debug!): ',
+                    vim.fn.getcwd() .. '/', 'file'
+                  )
+                end,
+                args = function()
+                  return vim.split(vim.fn.input('args: '), ' ')
                 end,
                 cwd = vim.fn.getcwd(),
                 stopOnEntry = false,
               },
             }
-          end
+          end,
+        },
+        cpp = {
+          configured = false,
+          config = function()
+            dap.adapters.codelldb = codelldb
+
+            dap.configurations.cpp = {
+              {
+                name = 'Debug CPP',
+                type = 'codelldb',
+                request = 'launch',
+                program = function()
+                  return vim.fn.input(
+                    'CPP program to debug: ', vim.fn.getcwd() .. '/', 'file'
+                  )
+                end,
+                args = function()
+                  return vim.split(vim.fn.input('args: '), ' ')
+                end,
+                cwd = vim.fn.getcwd(),
+                stopOnEntry = false,
+              },
+            }
+          end,
         },
       }
 

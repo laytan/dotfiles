@@ -1,11 +1,12 @@
 return {
   -- Dependency of lots of plugins.
   { 'nvim-lua/plenary.nvim', lazy = true },
-  { 'kyazdani42/nvim-web-devicons', lazy = true },
+  { 'nvim-tree/nvim-web-devicons', lazy = true },
 
   { 'folke/neodev.nvim', lazy = true, config = true },
 
-  { 'jneen/ragel.vim', ft = 'ragel' },
+  -- Normal buffer/vim operations on the quickfix list.
+  { 'itchyny/vim-qfedit' },
 
   -- Pretty vim.notify output.
   {
@@ -43,13 +44,6 @@ return {
     -- CmdlineEnter so we get auto-complete for the commands.
     event = 'CmdlineEnter',
   },
-
-  -- GO utility and debugging.
-  { 'olexsmir/gopher.nvim', ft = 'go', config = true },
-
-  -- Powerful note taking.
-  -- CmdlineEnter so we get auto-complete for the commands.
-  { 'phaazon/mind.nvim', branch = 'v2.2', event = 'CmdlineEnter', config = true },
 
   -- Powerful surround textobjects/actions.
   { 'kylechui/nvim-surround', event = 'VeryLazy', config = true },

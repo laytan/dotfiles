@@ -3,7 +3,7 @@ return {
   'L3MON4D3/LuaSnip', -- Snippet core functionality.
   dependencies = {
     'rafamadriz/friendly-snippets', -- Snippet definitions for lots of languages.
-    'kyazdani42/nvim-web-devicons',
+    'nvim-tree/nvim-web-devicons',
   },
   event = 'InsertEnter',
   config = function()

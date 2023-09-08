@@ -29,7 +29,15 @@ return {
       }
     )
 
+    local function customizations()
+      vim.cmd([[hi WinSeparator guifg=#363a4f]])
+      vim.cmd([[hi TreesitterContext guibg=#363a4f]])
+      vim.cmd([[hi NormalFloat guibg=#24273a]])
+      vim.cmd([[hi Normal guibg=#1E1E2E]])
+    end
+
     vim.cmd('colorscheme catppuccin')
+    customizations()
 
     -- Compile catppuccin after Lazy compiles.
     vim.api.nvim_create_autocmd(
@@ -40,15 +48,11 @@ return {
           vim.defer_fn(
             function()
               vim.cmd('colorscheme catppuccin')
+              customizations()
             end, 0
           ) -- Deferred for live reloading
         end,
       }
     )
-
-    vim.cmd([[hi WinSeparator guifg=#363a4f]])
-    vim.cmd([[hi TreesitterContext guibg=#363a4f]])
-    vim.cmd([[hi NormalFloat guibg=#24273a]])
-    vim.cmd([[hi Normal guibg=#1E1E2E]])
   end,
 }

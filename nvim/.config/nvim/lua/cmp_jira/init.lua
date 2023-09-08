@@ -1,10 +1,7 @@
--- Completes Jira tickets using 
+-- Completes Jira tickets using
 -- https://github.com/ankitpokhrel/jira-cli
 --
-local ok, Job = pcall(require, 'plenary.job')
-if not ok then
-  return
-end
+local Job = require("plenary.job")
 
 local cmp_jira = { projects = { 'MCM', 'PRJ', 'IO', 'BMS' } }
 
@@ -40,6 +37,12 @@ source.complete = function(self, params, callback)
   -- Return from cache, and after that, refresh the cache for instant response.
   if is_cached then
     callback({ items = self.cache[project], isIncomplete = false })
+  end
+
+  if vim.fn.executable('jira') ~= 1 then
+    vim.notify('trying to complete Jira tickets, `jira` executable not found', vim.log.levels.WARN)
+    callback({ items = {}, isIncomplete = false })
+    return
   end
 
   Job:new(
