@@ -31,3 +31,10 @@
   (attribute_name) @_name (#lua-match? @_name "^:")
   (quoted_attribute_value
     (attribute_value) @injection.content (#set! injection.language "javascript")))
+
+; HTMX
+(attribute
+  (attribute_name) @_name
+    (#match? @_name "^hx-on")
+  (quoted_attribute_value
+    (attribute_value) @injection.content (#set! injection.language "javascript")))
