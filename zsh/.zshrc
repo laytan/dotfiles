@@ -18,7 +18,7 @@ alias grum="vendor/bin/grumphp run"
 alias drupal="vendor/bin/drupal"
 alias drush="vendor/bin/drush"
 alias sail="vendor/bin/sail"
-alias cat="bat"
+[ -x "$(which bat)" ] && alias cat="bat"
 
 alias update-nvim-stable='asdf uninstall neovim stable && asdf install neovim stable'
 alias update-nvim-nightly='asdf uninstall neovim nightly && asdf install neovim nightly'
@@ -41,3 +41,73 @@ alias update-nvim-master='asdf uninstall neovim ref:master && asdf install neovi
 autoload -U compinit; compinit
 
 bindkey -v
+
+export PROMPT="
+%{$fg_bold[green]%}%~%{$reset_color%}$(git_prompt_info)%F{red}%(?..%B exit code %?% %b)%{$reset_color%}
+$ "
+
+function preexec() {
+  timer=$(($(print -P %D{%s%6.})/1000))
+}
+
+function precmd() {
+  if [ $timer ]; then
+    now=$(($(print -P %D{%s%6.})/1000))
+    elapsed=$(($now-$timer))
+
+    export RPROMPT="%{$fg[black]%}$(format_duration elapsed)%{$reset_color%}"
+    unset timer
+  fi
+}
+
+# Function to format milliseconds into larger units
+format_duration() {
+    local duration_in_ms=$1
+
+    # Define the conversion factors
+    local ms_per_second=1000
+    local seconds_per_minute=60
+    local minutes_per_hour=60
+    local hours_per_day=24
+
+    # Calculate the values for each unit
+    local days=$((duration_in_ms / (ms_per_second * seconds_per_minute * minutes_per_hour * hours_per_day)))
+    local hours=$((duration_in_ms / (ms_per_second * seconds_per_minute * minutes_per_hour) % hours_per_day))
+    local minutes=$((duration_in_ms / (ms_per_second * seconds_per_minute) % minutes_per_hour))
+    local seconds=$((duration_in_ms / ms_per_second % seconds_per_minute))
+    local milliseconds=$((duration_in_ms % ms_per_second))
+
+    # Format and display the duration
+    local formatted_duration=""
+    
+    if [[ $days -gt 0 ]]; then
+        formatted_duration="${days}d"
+    fi
+    
+    if [[ $hours -gt 0 ]]; then
+        formatted_duration="${formatted_duration}${hours}h"
+    fi
+    
+    if [[ $minutes -gt 0 ]]; then
+        formatted_duration="${formatted_duration}${minutes}m"
+    fi
+    
+    if [[ $seconds -gt 0 ]]; then
+        formatted_duration="${formatted_duration}${seconds}"
+        if [[ $milliseconds -gt 0 ]]; then
+            formatted_duration="${formatted_duration}."
+        else
+            formatted_duration="${formatted_duration}s"
+        fi
+    fi
+    
+    if [[ $milliseconds -gt 0 ]]; then
+        if [[ $seconds -gt 0 ]]; then
+            formatted_duration="${formatted_duration}${milliseconds}s"
+        else
+            formatted_duration="${formatted_duration}${milliseconds}ms"
+        fi
+    fi
+
+    echo $formatted_duration
+}
