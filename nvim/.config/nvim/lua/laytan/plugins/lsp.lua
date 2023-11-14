@@ -2,14 +2,30 @@
 return {
   'neovim/nvim-lspconfig', -- Standard configuration for most LSPs.
   dependencies = {
-    -- big error {
-    --   'kosayoda/nvim-lightbulb',
-    --   opts = {
-    --     virtual_text = { enabled = true },
-    --     autocmd      = { enabled = true },
-    --   },
-    -- }, -- Shows a lightbulb on the left if there are code actions for that line.
-    { 'j-hui/fidget.nvim', tag = 'legacy', opts = { window = { blend = 0 } } }, -- Shows progress and status of LSPs and their actions.
+    {
+      'kosayoda/nvim-lightbulb',
+      opts = {
+        status_text = { enabled = true },
+        autocmd     = { enabled = true },
+      },
+    }, -- Shows a lightbulb on the left if there are code actions for that line.
+    {
+      'j-hui/fidget.nvim', -- Shows progress and status of LSPs and their actions.
+      opts = {
+        progress = {
+            display = {
+                render_limit = 100,
+                done_ttl     = 5,
+            },
+        },
+        notification = {
+          override_vim_notify = true,
+          configs = {
+            default = { ttl = 10 },
+          },
+        },
+      },
+    },
     'nvim-telescope/telescope.nvim', -- Used as picker if there are multiple options.
     'folke/neodev.nvim',
   },
@@ -24,6 +40,8 @@ return {
     local util = require('lspconfig.util')
     local config, php_root_dirs = require('laytan.lsp').config,
                                   require('laytan.lsp').php_root_dirs
+
+    -- vim.lsp.set_log_level(vim.log.levels.DEBUG)
 
     local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
     local format_on_save_enabled = false
@@ -172,7 +190,6 @@ return {
           cmd = {
             'phpls',
             '-extensions=.php,.module,.install,.theme,.sfc,.inc',
-            '-statsviz.enabled=true',
           },
           root_dir = php_root_dirs,
         }

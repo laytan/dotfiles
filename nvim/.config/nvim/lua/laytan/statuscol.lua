@@ -72,6 +72,7 @@ function gitsign_bar()
   local hl = get_ln_gitsign() or 'NonText'
   local bar = ' ▏'
 
+
   return table.concat({ '%#', hl, '#', bar })
 end
 
@@ -91,6 +92,8 @@ function num_bar()
   end
 end
 
-vim.opt.statuscolumn = '%=%{%v:lua.num_bar()%} %{%v:lua.gitsign_bar()%}'
+-- TODO: something broke it
+-- vim.opt.statuscolumn = '%=%{%v:lua.num_bar()%} %{%v:lua.gitsign_bar()%}'
+
 vim.opt.cursorline = true
 vim.opt.cursorlineopt = 'number'

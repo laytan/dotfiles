@@ -1,5 +1,40 @@
+local function input_sync(opts)
+  local co = coroutine.running()
+  vim.ui.input(opts, function(result)
+    vim.schedule(function()
+      coroutine.resume(co, result)
+    end)
+  end)
+  return coroutine.yield()
+end
+
+local function select_sync(list, opts)
+  local co = coroutine.running()
+  vim.ui.select(list, opts, function(result)
+    vim.schedule(function()
+      coroutine.resume(co, result)
+    end)
+  end)
+  return coroutine.yield()
+end
+
+local function pick_program()
+  local dap = require('dap')
+
+  local result = input_sync({
+    prompt     = 'Path to executable (compiled with -debug!): ',
+    default    = vim.fn.getcwd() .. '/',
+    completion = 'file',
+  })
+
+  if result == nil or result == '' or result:sub(-1) == '/' then
+    return dap.ABORT
+  end
+
+  return result
+end
+
 return {
-  { 'mfussenegger/nvim-dap-python', lazy = true },
   {
     'mfussenegger/nvim-dap', -- Core functionality for debugging.
     dependencies = {
@@ -25,27 +60,35 @@ return {
     config = function()
       local dap = require('dap')
       local dapui = require('dapui')
+      local daputil = require('dap.utils')
 
       require('nvim-dap-virtual-text').setup({})
 
       dapui.setup()
 
       dap.listeners.after.event_initialized['dapui_config'] = function()
+        vim.keymap.set('n', '<Right>', dap.step_over)
+        vim.keymap.set('n', '<Up>',    dap.step_out)
+        vim.keymap.set('n', '<Down>',  dap.step_into)
+
         dapui.open({})
       end
 
       dap.listeners.before.event_terminated['dapui_config'] = function()
+        vim.keymap.del('n', '<Right>')
+        vim.keymap.del('n', '<Up>')
+        vim.keymap.del('n', '<Down>')
+
         dapui.close({})
       end
 
       dap.listeners.before.event_exited['dapui_config'] = function()
+        vim.keymap.del('n', '<Right>')
+        vim.keymap.del('n', '<Up>')
+        vim.keymap.del('n', '<Down>')
+
         dapui.close({})
       end
-
-      -- Putting these here so dap doesn't load when these keys are accidentally pressed.
-      vim.keymap.set('n', '<Right>', dap.step_over)
-      vim.keymap.set('n', '<Up>', dap.step_out)
-      vim.keymap.set('n', '<Down>', dap.step_into)
 
       -- catppuccin
       local sign = vim.fn.sign_define
@@ -74,94 +117,65 @@ return {
           args = { '--port', '1300' },
         },
       }
+
+      dap.adapters.codelldb   = codelldb
+
+      local lldb_default_config = {
+        -- Launch a process and debug it.
+        {
+          name        = 'Launch & Debug',
+          type        = 'codelldb',
+          request     = 'launch',
+          cwd         = vim.fn.getcwd(),
+          stopOnEntry = false,
+          program     = pick_program,
+          args        = function()
+            local result = input_sync({
+              prompt = 'program arguments: ',
+            })
+
+            if result == nil then
+              return dap.ABORT
+            end
+
+            return vim.split(result, ' ')
+          end,
+        },
+        -- Find an existing process to attach to.
+        {
+          name        = 'Attach & Debug',
+          type        = 'codelldb',
+          request     = 'attach',
+          stopOnEntry = false,
+          program     = pick_program,
+          pid         = daputil.pick_process,
+        },
+      }
+
+      dap.configurations.odin = lldb_default_config
+      dap.configurations.cpp  = lldb_default_config
+      dap.configurations.c    = lldb_default_config
+
+      dap.adapters.php = {
+        command = 'php-debug-adapter',
+        type    = 'executable',
+      }
+      dap.configurations.php = {
+        {
+          type    = 'php',
+          request = 'launch',
+          name    = 'Listen for Xdebug',
+          port    = 9003,
+        },
+      }
+
       -- Map of configuration per filetype, this lazy loads, so we don't load
       -- each dap adapter/language when we run.
       local filetypes = {
-
-        python = {
-          configured = false,
-          config = function()
-            local dap_python = require('dap-python')
-            dap_python.setup('~/.virtualenvs/debugpy/bin/python')
-            dap_python.resolve_python = function()
-              return '/Users/laytan/.pyenv/shims/python'
-            end
-          end,
-        },
-
         go = {
           configured = false,
           config = function()
             require('gopher.dap').setup()
-          end,
-        },
-
-        php = {
-          configured = false,
-          config = function()
-            dap.adapters.php = {
-              type = 'executable',
-              command = 'php-debug-adapter',
-            }
-
-            dap.configurations.php = {
-              {
-                type = 'php',
-                request = 'launch',
-                name = 'Listen for Xdebug',
-                port = 9003,
-              },
-            }
-          end,
-        },
-
-        odin = {
-          configured = false,
-          config = function()
-            dap.adapters.codelldb = codelldb
-
-            dap.configurations.odin = {
-              {
-                name = 'Debug Odin',
-                type = 'codelldb',
-                request = 'launch',
-                program = function()
-                  return vim.fn.input(
-                    'Path to executable (compiled with -debug!): ',
-                    vim.fn.getcwd() .. '/', 'file'
-                  )
-                end,
-                args = function()
-                  return vim.split(vim.fn.input('args: '), ' ')
-                end,
-                cwd = vim.fn.getcwd(),
-                stopOnEntry = false,
-              },
-            }
-          end,
-        },
-        cpp = {
-          configured = false,
-          config = function()
-            dap.adapters.codelldb = codelldb
-
-            dap.configurations.cpp = {
-              {
-                name = 'Debug CPP',
-                type = 'codelldb',
-                request = 'launch',
-                program = function()
-                  return vim.fn.input(
-                    'CPP program to debug: ', vim.fn.getcwd() .. '/', 'file'
-                  )
-                end,
-                args = function()
-                  return vim.split(vim.fn.input('args: '), ' ')
-                end,
-                cwd = vim.fn.getcwd(),
-                stopOnEntry = false,
-              },
-            }
           end,
         },
       }

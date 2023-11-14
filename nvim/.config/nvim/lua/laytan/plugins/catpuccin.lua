@@ -15,7 +15,6 @@ return {
           aerial = true,
           cmp = true,
           fidget = true,
-          notify = true,
           nvimtree = true,
           telescope = true,
           treesitter = true,
@@ -32,8 +31,10 @@ return {
     local function customizations()
       vim.cmd([[hi WinSeparator guifg=#363a4f]])
       vim.cmd([[hi TreesitterContext guibg=#363a4f]])
+      vim.cmd([[hi TreesitterContextBottom NONE]])
       vim.cmd([[hi NormalFloat guibg=#24273a]])
       vim.cmd([[hi Normal guibg=#1E1E2E]])
+      vim.cmd([[hi LightBulbVirtualText guibg=#1E1E2E]])
     end
 
     vim.cmd('colorscheme catppuccin')

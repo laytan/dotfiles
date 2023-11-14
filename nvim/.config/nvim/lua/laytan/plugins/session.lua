@@ -28,8 +28,11 @@ local function load_session()
   if not ok then
     vim.notify(
       'Could not load session "' .. session.name .. '": ' .. err,
-      vim.log.levels.ERROR
+      vim.log.levels.WARN
     )
+    -- Recreate the session
+    p.delete(session.name, { no_confirm = true })
+    p.save(session.name)
   end
 end
 
@@ -45,7 +48,11 @@ end
 
 return {
   'jedrzejboczar/possession.nvim',
-  dependencies = { 'nvim-lua/plenary.nvim', 'rcarriga/nvim-notify' },
+  dependencies = {
+    'nvim-lua/plenary.nvim',
+    'rcarriga/nvim-notify',
+    --[[ Need to have as dependency to work but isn't actually one --]] 'mfussenegger/nvim-dap',
+  },
   keys = { { '<leader>sl', load_session }, { '<leader>ss', save_session } },
   lazy = false,
   config = function()

@@ -5,7 +5,7 @@ export NVM_DIR="$HOME/.nvm"
 dir=$0:A:h
 
 # Gitignored local configuration.
-[ -f "$dir/.zshrc_local" ] && . "$dir/.zshrc_local"
+source "$HOME/.zshrc_local"
 
 ZSH_THEME="amuse"
 
@@ -55,6 +55,9 @@ function precmd() {
     now=$(($(print -P %D{%s%6.})/1000))
     elapsed=$(($now-$timer))
 
+    export PROMPT="
+%{$fg_bold[green]%}%~%{$reset_color%}$(git_prompt_info)%F{red}%(?..%B exit code %?% %b)%{$reset_color%}
+$ "
     export RPROMPT="%{$fg[black]%}$(format_duration elapsed)%{$reset_color%}"
     unset timer
   fi

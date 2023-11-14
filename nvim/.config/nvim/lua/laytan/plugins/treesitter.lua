@@ -32,7 +32,7 @@ return {
       }
     )
 
-    require('treesitter-context').setup({ enable = true, line_numbers = false })
+    require('treesitter-context').setup({ line_numbers = false })
 
     vim.api.nvim_create_user_command("TSPlayground", ":InspectTree", {})
   end,

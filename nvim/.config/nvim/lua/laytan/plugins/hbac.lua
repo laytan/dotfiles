@@ -1,3 +1,4 @@
+-- Automatically delete open buffers after a while.
 return {
   'axkirillov/hbac.nvim',
   config = function()

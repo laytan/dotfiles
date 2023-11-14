@@ -8,16 +8,6 @@ return {
   -- Normal buffer/vim operations on the quickfix list.
   { 'itchyny/vim-qfedit' },
 
-  -- Pretty vim.notify output.
-  {
-    'rcarriga/nvim-notify',
-    config = function()
-      local notify = require('notify')
-      notify.setup({ timeout = 1500, background_colour = '#000000' })
-      vim.notify = notify
-    end,
-  },
-
   { 'lewis6991/gitsigns.nvim', config = true, event = 'BufEnter' },
 
   {
@@ -72,10 +62,16 @@ return {
     opts = {
       filetypes = {
         ['php'] = {
-          left = [[ray(']],
-          right = [[');]],
-          mid_var = [[', $]],
+          left      = [[dump(']],
+          right     = [[');]],
+          mid_var   = [[', $]],
           right_var = [[);]],
+        },
+        ['odin'] = {
+          left      = [[fmt.printf("]],
+          right     = [[")]],
+          mid_var   = [[", ]],
+          right_var = [[)]],
         },
       },
     },
