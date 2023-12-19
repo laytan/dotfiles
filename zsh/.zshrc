@@ -28,9 +28,7 @@ alias update-nvim-master='asdf uninstall neovim ref:master && asdf install neovi
 # NVM
 [ -s "$NVM_DIR/nvm.sh" ]                           && . "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ]                  && . "$NVM_DIR/bash_completion"
-# Google cloud SDK
-[ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]       && . "$HOME/google-cloud-sdk/path.zsh.inc"
-[ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ] && . "$HOME/google-cloud-sdk/completion.zsh.inc"
+
 [ -f "/opt/homebrew/opt/asdf/libexec/asdf.sh" ]    && . "/opt/homebrew/opt/asdf/libexec/asdf.sh"
 [ -f "$HOME/.fzf.zsh" ]                            && . "$HOME/.fzf.zsh"
 [ -f "$HOME/.opam/opam-init/init.zsh" ]            && . "$HOME/.opam/opam-init/init.zsh"

@@ -58,7 +58,23 @@ return {
   config = function()
     vim.opt.sessionoptions = 'folds,help,tabpages,buffers'
     local p = require('possession')
-    p.setup({ autosave = { current = true } })
+    p.setup({
+      autosave = { current = true },
+      hooks = {
+        before_save = function()
+          return {
+            -- Saves the stored command for my quick_command functionality.
+            quick_command_current_command = require('laytan.quick_command').current_command,
+          }
+        end,
+        after_load = function(_, user_data)
+          -- Load the quick command that was stored.
+          if user_data.quick_command_current_command ~= nil then
+            require('laytan.quick_command').current_command = user_data.quick_command_current_command
+          end
+        end
+      },
+    })
 
     if vim.fn.argc() ~= 0 then
       return

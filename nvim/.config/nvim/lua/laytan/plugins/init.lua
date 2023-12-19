@@ -5,6 +5,56 @@ return {
 
   { 'folke/neodev.nvim', lazy = true, config = true },
 
+  { 'm00qek/baleia.nvim', lazy = true },
+
+  {
+    'williamboman/mason.nvim',
+    config = true,
+    cmd = 'Mason',
+  },
+
+  {
+    'stevearc/oil.nvim',
+    opts = {
+      delete_to_trash = true,
+      view_options = {
+        show_hidden = true,
+      },
+    },
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    keys = { { '-', ':Oil<cr>' } },
+  },
+
+  {
+    'nvim-pack/nvim-spectre',
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    config = true,
+    cmd = 'Spectre',
+    keys = {
+      {
+        '<leader>sr',
+        '<cmd>lua require("spectre").toggle()<CR>',
+        desc = 'Toggle Spectre',
+      },
+      {
+        '<leader>sw',
+        '<cmd>lua require("spectre").open_visual({select_word=true})<CR>',
+        desc = 'Search current word',
+      },
+    },
+  },
+
+  {
+    {
+      'laytan/tailwind-sorter.nvim',
+      dir = "~/projects/tailwind-sorter.nvim",
+      dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-lua/plenary.nvim' },
+      build = 'cd formatter && npm i && npm run build',
+      config = true,
+      event = 'CmdlineEnter',
+    },
+  },
+
   -- Normal buffer/vim operations on the quickfix list.
   { 'itchyny/vim-qfedit' },
 
@@ -53,6 +103,16 @@ return {
     -- CmdlineEnter so we get auto-complete for the commands.
     event = 'CmdlineEnter',
     config = true,
+  },
+
+  {
+    'olexsmir/gopher.nvim',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'nvim-treesitter/nvim-treesitter',
+    },
+    config = true,
+    ft = 'go',
   },
 
   -- Shortcuts for inserting and removing debug and print statements.

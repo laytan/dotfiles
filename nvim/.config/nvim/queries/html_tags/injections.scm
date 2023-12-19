@@ -20,6 +20,13 @@
   (quoted_attribute_value
     (attribute_value) @injection.content (#set! injection.language "javascript")))
 
+; VueJS
+(attribute
+  (attribute_name) @_name
+    (#match? @_name "^v-")
+  (quoted_attribute_value
+    (attribute_value) @injection.content (#set! injection.language "javascript")))
+
 ; @ is an event listener in most front-end templating languages
 (attribute
   (attribute_name) @_name (#lua-match? @_name "^@")

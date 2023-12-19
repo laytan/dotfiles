@@ -14,5 +14,7 @@ require('lazy').setup('laytan.plugins', {
   },
   change_detection = { enabled = false, },
 })
+require('laytan.quick_command').setup()
+require('laytan.lsp_focus').setup()
 require('laytan.keymaps')
 require('laytan.autocommands')

@@ -6,9 +6,7 @@ return {
     'hrsh7th/cmp-nvim-lsp', -- Provides LSP completions.
     'hrsh7th/cmp-buffer', -- Provides completions for symbols in the same buffer.
     'hrsh7th/cmp-path', -- Provides completions for paths on the system.
-    'davidsierradz/cmp-conventionalcommits', -- Provides completions for conventional commits symbols.
     { 'tzachar/cmp-tabnine', build = './install.sh' }, -- Provides completions using the Tabnine AI service.
-    'kristijanhusak/vim-dadbod-completion', -- Completes db symbols using dadbod.
     { 'saadparwaiz1/cmp_luasnip', dependencies = { 'L3MON4D3/LuaSnip' } }, -- Integrates snippet completion using LuaSnip.
     'onsails/lspkind.nvim', -- Used for nice icons in completion menu (class, function, package, etc.).
   },
@@ -36,9 +34,6 @@ return {
       cmp_tabnine = '[TN]',
       path = '[Path]',
       luasnips = '[Snip]',
-      ['vim-dadbod-completion'] = '[DB]',
-      jira = '[Jira]',
-      conventionalcommits = '[Commy]',
     }
 
     cmp.setup(
@@ -78,7 +73,6 @@ return {
           end,
         },
         sources = {
-          { name = 'jira', keyword_length = 2 },
           { name = 'nvim_lsp' },
           { name = 'luasnip', keyword_length = 2 },
           { name = 'cmp_tabnine' },
@@ -88,30 +82,5 @@ return {
         preselect = { cmp.PreselectMode.None },
       }
     )
-
-    cmp.setup.filetype(
-      { 'sql', 'mysql', 'psql' }, {
-        sources = cmp.config.sources(
-          {
-            { name = 'vim-dadbod-completion' },
-            { name = 'cmp_tabnine' },
-            { name = 'buffer' },
-          }
-        ),
-      }
-    )
-
-    cmp.setup.filetype(
-      'gitcommit', {
-        sources = cmp.config.sources(
-          {
-            { name = 'conventionalcommits' },
-            { name = 'jira' },
-          }
-        ),
-      }
-    )
-
-    require('cmp_jira')
   end,
 }

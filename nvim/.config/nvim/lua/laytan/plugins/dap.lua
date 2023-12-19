@@ -75,17 +75,17 @@ return {
       end
 
       dap.listeners.before.event_terminated['dapui_config'] = function()
-        vim.keymap.del('n', '<Right>')
-        vim.keymap.del('n', '<Up>')
-        vim.keymap.del('n', '<Down>')
+        pcall(vim.keymap.del, 'n', '<Right>')
+        pcall(vim.keymap.del, 'n', '<Up>')
+        pcall(vim.keymap.del, 'n', '<Down>')
 
         dapui.close({})
       end
 
       dap.listeners.before.event_exited['dapui_config'] = function()
-        vim.keymap.del('n', '<Right>')
-        vim.keymap.del('n', '<Up>')
-        vim.keymap.del('n', '<Down>')
+        pcall(vim.keymap.del, 'n', '<Right>')
+        pcall(vim.keymap.del, 'n', '<Up>')
+        pcall(vim.keymap.del, 'n', '<Down>')
 
         dapui.close({})
       end
@@ -113,7 +113,7 @@ return {
         type = 'server',
         port = 1300,
         executable = {
-          command = '/Users/laytan/codelldb/extension/adapter/codelldb',
+          command = 'codelldb',
           args = { '--port', '1300' },
         },
       }
@@ -160,6 +160,7 @@ return {
         command = 'php-debug-adapter',
         type    = 'executable',
       }
+
       dap.configurations.php = {
         {
           type    = 'php',

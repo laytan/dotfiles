@@ -1,8 +1,7 @@
 {
     "require": {
         "laravel/valet": "^4.0",
-        "tightenco/takeout": "^2.4",
-        "spatie/global-ray": "^1.0"
+        "tightenco/takeout": "^1.8"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,

@@ -11,6 +11,7 @@
 	defaultBranch = main
 [advice]
 	addIgnoredFile = false
+	detachedHead = true
 [alias]
 	nb = "!f() { git checkout -b $1 && git push -u origin $1; }; f"
 	bd = "!bd() { branch=${1:-$(git branch --show-current)}; ticket=$(cut -d \"/\" -f1 <<< \"$branch\"); first=$(git log $branch --oneline | grep -v -m 1 $ticket); commit=$(cut -d \" \" -f1 <<< \"$first\"); git diff $commit..$branch; }; bd"

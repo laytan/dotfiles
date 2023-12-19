@@ -56,19 +56,3 @@ vim.api.nvim_create_autocmd(
     end,
   }
 )
-
--- Make tab actually insert a tab in a makefile.
-vim.api.nvim_create_autocmd(
-  'BufEnter', {
-    group = group,
-    pattern = 'Makefile',
-    callback = function()
-      -- Run after other plugins that change it.
-      vim.schedule(
-        function()
-          vim.cmd('setlocal noexpandtab')
-        end
-      )
-    end,
-  }
-)
