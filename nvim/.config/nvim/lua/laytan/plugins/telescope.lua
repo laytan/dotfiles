@@ -107,15 +107,21 @@ return {
       end
     )
 
+    local odin_path = vim.fn.exepath("odin")
+    if odin_path ~= "" then
+      local odin_root = vim.fs.dirname(odin_path)
+      vim.keymap.set('n', '<leader>fof', function()
+        builtin.find_files(theme({ cwd = odin_root, prompt_title = "Find Odin Files" }))
+      end)
+
+      vim.keymap.set('n', '<leader>os', function()
+        builtin.live_grep(theme({ cwd = odin_root, prompt_title = "Grep Odin Files" }))
+      end)
+    end
+
     vim.keymap.set(
       'n', '<leader>?', function()
         builtin.help_tags(theme())
-      end
-    )
-
-    vim.keymap.set(
-      'n', '<leader>ob', function()
-        builtin.buffers(theme())
       end
     )
 

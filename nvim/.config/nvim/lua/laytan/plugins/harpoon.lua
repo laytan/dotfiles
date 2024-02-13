@@ -1,6 +1,7 @@
 -- Quick access to set of files.
 return {
   'ThePrimeagen/harpoon',
+  branch = 'harpoon2',
   keys = {
     '<leader>ha',
     '<leader>hd',
@@ -12,47 +13,47 @@ return {
     '<leader>;',
   },
   config = function()
-    local mark = require('harpoon.mark')
-    local ui = require('harpoon.ui')
+    local harpoon = require('harpoon')
+    harpoon:setup({})
 
     vim.keymap.set(
       'n', '<leader>ha', function()
-        mark.add_file()
+        harpoon:list():append()
       end
     )
     vim.keymap.set(
       'n', '<leader>hd', function()
-        mark.rm_file()
+        harpoon:list():remove()
       end
     )
     vim.keymap.set(
       'n', '<leader>hc', function()
-        mark.clear_all()
+        harpoon:list():clear()
       end
     )
     vim.keymap.set(
       'n', '<leader>hl', function()
-        ui.toggle_quick_menu()
+        harpoon.ui.toggle_quick_menu(harpoon:list())
       end
     )
     vim.keymap.set(
       'n', '<leader>j', function()
-        ui.nav_file(1)
+        harpoon:list():select(1)
       end
     )
     vim.keymap.set(
       'n', '<leader>k', function()
-        ui.nav_file(2)
+        harpoon:list():select(2)
       end
     )
     vim.keymap.set(
       'n', '<leader>l', function()
-        ui.nav_file(3)
+        harpoon:list():select(3)
       end
     )
     vim.keymap.set(
       'n', '<leader>;', function()
-        ui.nav_file(4)
+        harpoon:list():select(4)
       end
     )
   end,

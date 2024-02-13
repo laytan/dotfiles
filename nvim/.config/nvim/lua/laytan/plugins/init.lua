@@ -136,4 +136,21 @@ return {
       },
     },
   },
+
+  {
+    'jwalton512/vim-blade',
+    ft = 'blade',
+  },
+
+  {
+    'alisdair/vim-armasm',
+    config = function()
+      vim.api.nvim_create_autocmd({'FileType'}, {
+        pattern = "armasm",
+        callback = function()
+          vim.opt_local.spell=false
+        end,
+      })
+    end,
+  },
 }

@@ -1,6 +1,5 @@
 require('laytan.install')
 require('laytan.set')
-require('laytan.statuscol')
 require('lazy').setup('laytan.plugins', {
   dev = {
     path     = '~/projects',
@@ -18,3 +17,11 @@ require('laytan.quick_command').setup()
 require('laytan.lsp_focus').setup()
 require('laytan.keymaps')
 require('laytan.autocommands')
+
+vim.filetype.add({
+  pattern = {
+    ['.*%.blade%.php'] = 'blade',
+    ['.*%.neon']       = 'yaml',
+    ['.*%.sfc']        = 'php',
+  },
+})

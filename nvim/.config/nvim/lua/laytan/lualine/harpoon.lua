@@ -9,24 +9,25 @@ end
 
 -- Show harpoon marks.
 local harpoon = require('harpoon')
-local harpoon_mark = require('harpoon.mark')
 local mark_keys = { 'j', 'k', 'l', ';' }
 
 return function()
-  local marks = harpoon.get_mark_config().marks
-  local current_mark_idx = harpoon_mark.get_current_index()
   local output = {}
 
+  local current = harpoon:list().config:create_list_item()
+
   for i, key in ipairs(mark_keys) do
-    if marks[i] == nil then
+    local item = harpoon:list():get(i)
+    if item == nil then
       goto continue
     end
 
-    local filename = basename(marks[i].filename)
+    local filename = basename(item.value)
 
     local label = ' ' .. key .. ' ' .. filename .. ' '
 
-    if i == current_mark_idx then
+    local is_open = harpoon:list().config.equals(item, current)
+    if is_open then
       table.insert(output, '%#lualine_a_normal#' .. label)
     else
       table.insert(output, '%#lualine_a_inactive#' .. label)

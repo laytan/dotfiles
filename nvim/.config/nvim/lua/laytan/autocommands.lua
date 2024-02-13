@@ -29,17 +29,8 @@ end
 local group = vim.api.nvim_create_augroup('laytan_general', {})
 
 vim.api.nvim_create_autocmd(
-  'BufEnter',
-  { group = group, pattern = '*.neon', command = 'setlocal filetype=yaml' }
-)
-
-vim.api.nvim_create_autocmd(
-  'BufEnter',
-  { group = group, pattern = '*.sfc', command = 'setlocal filetype=php' }
-)
-
-vim.api.nvim_create_autocmd(
-  'BufEnter', {
+  {'BufNewFile', 'BufRead'},
+  {
     group = group,
     pattern = { '*.jpg', '*.jpeg', '*.png' },
     callback = openImage,

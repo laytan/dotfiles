@@ -28,7 +28,7 @@ return {
     local config, php_root_dirs = require('laytan.lsp').config,
                                   require('laytan.lsp').php_root_dirs
 
-    -- vim.lsp.set_log_level(vim.log.levels.DEBUG)
+    vim.lsp.set_log_level(vim.log.levels.INFO)
 
     local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
     local format_on_save_enabled = false
@@ -65,6 +65,14 @@ return {
 
           return util.path.is_descendant(cwd, root) and cwd or root
         end,
+      },
+    }
+
+    configs.tos = {
+      default_config = {
+        cmd = { '/Users/laytan/projects/tos/bin/release_safe' },
+        filetypes = { 'odin' },
+        root_dir = util.root_pattern('.git', 'ols.json'),
       },
     }
 
@@ -195,6 +203,7 @@ return {
 
     -- Odin
     lspconfig.ols.setup(config({}))
+    lspconfig.tos.setup(config({}))
 
     lspconfig.clangd.setup(
       config(

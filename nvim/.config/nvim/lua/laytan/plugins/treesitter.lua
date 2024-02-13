@@ -29,6 +29,7 @@ return {
           'luap', -- Lua patterns.
         },
         highlight = { enable = true },
+        indent = { enable = true },
       }
     )
 
