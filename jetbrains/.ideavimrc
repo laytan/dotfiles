@@ -41,3 +41,5 @@ inoremap <C-c> <esc>
 
 " Replace all occurances
 vnoremap <C-r> "hy:%s/<C-r>h//g<left><left>
+
+set clipboard+=unnamed
