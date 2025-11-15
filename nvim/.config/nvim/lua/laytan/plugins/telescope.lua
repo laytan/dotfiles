@@ -9,6 +9,7 @@ return {
       dependencies = { 'kkharji/sqlite.lua' },
       config = true,
     },
+    'nvim-telescope/telescope-live-grep-args.nvim',
     'jedrzejboczar/possession.nvim',
   },
   -- NOTE: telescope handles vim.ui.select, I did not find a way to have it
@@ -19,6 +20,7 @@ return {
     local builtin = require('telescope.builtin')
     local themes = require('telescope.themes')
     local actions = require('telescope.actions')
+    local lga_actions = require('telescope-live-grep-args.actions')
 
     local theme = function(opts)
       opts = opts or {}
@@ -44,10 +46,19 @@ return {
       {
         extensions = {
           ['ui-select'] = { theme() },
+          live_grep_args = {
+            auto_quoting = true,
+            mappings = {
+              i = {
+                ['<C-k>'] = lga_actions.quote_prompt(),
+                ['<C-i>'] = lga_actions.quote_prompt({ postfix = ' --iglob' }),
+              },
+            },
+          },
         },
         defaults = {
           mappings = {
-            i = {
+            n = {
               ['<C-j>'] = actions.cycle_history_next,
               ['<C-k>'] = actions.cycle_history_prev,
             },
@@ -59,39 +70,42 @@ return {
     telescope.load_extension('fzf')
     telescope.load_extension('ui-select')
     telescope.load_extension('possession')
+    telescope.load_extension('live_grep_args')
 
     vim.keymap.set(
       'n', '<leader>ps', function()
-        builtin.live_grep(theme())
+        telescope.extensions.live_grep_args.live_grep_args(theme())
       end
     )
 
     vim.keymap.set(
       'n', '<leader>fps', function()
-        builtin.live_grep(
-          theme(
-            {
-              vimgrep_arguments = {
-                'rg',
-                '--color=never',
-                '--no-heading',
-                '--with-filename',
-                '--line-number',
-                '--column',
-                '--smart-case',
-                '-uu',
-                '--glob',
-                '!.git/*',
-              },
-            }
-          )
-        )
+        telescope.extensions.live_grep_args.live_grep_args(theme({
+          vimgrep_arguments = {
+            'rg',
+            '--color=never',
+            '--no-heading',
+            '--with-filename',
+            '--line-number',
+            '--column',
+            '--smart-case',
+            '-uu',
+            '--glob',
+            '!.git/*',
+          },
+        }))
       end
     )
 
     vim.keymap.set(
       'n', '<leader>tr', function()
         builtin.resume(theme())
+      end
+    )
+
+    vim.keymap.set(
+      'n', '<leader>tt', function()
+        builtin.diagnostics(theme())
       end
     )
 

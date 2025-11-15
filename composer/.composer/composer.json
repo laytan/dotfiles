@@ -1,7 +1,6 @@
 {
     "require": {
-        "laravel/valet": "^4.0",
-        "tightenco/takeout": "^1.8"
+        "tightenco/takeout": "~2.7"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,

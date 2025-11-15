@@ -72,8 +72,40 @@ M.run = function()
     M.close()
   end
 
-  -- Probably doesn't cover all use cases but its fine.
-  local parts = vim.split(M.current_command, ' ')
+  local function split_args(input)
+      local args = {}
+      local in_quote = false
+      local current_arg = ""
+      local escape_next = false
+
+      for i = 1, #input do
+          local char = input:sub(i, i)
+
+          if escape_next then
+              current_arg = current_arg .. char
+              escape_next = false
+          elseif char == "\\" then
+              escape_next = true
+          elseif char == '"' then
+              in_quote = not in_quote
+          elseif char == " " and not in_quote then
+              if #current_arg > 0 then
+                  table.insert(args, current_arg)
+                  current_arg = ""
+              end
+          else
+              current_arg = current_arg .. char
+          end
+      end
+
+      if #current_arg > 0 then
+          table.insert(args, current_arg)
+      end
+
+      return args
+  end
+
+  local parts = split_args(M.current_command)
 
   M.running_job = Job:new({
     command = 'time',

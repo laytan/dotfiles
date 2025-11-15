@@ -1,4 +1,4 @@
-local vim_highlight = require('vim.highlight')
+local vim_highlight = require('vim.hl')
 
 -- TODO: convert to lua, support linux
 local function openImage()

@@ -11,11 +11,9 @@ return {
 
     neogit.setup(
       {
-        -- disable_context_highlighting = true,
-        -- disable_builtin_notifications = true,
+        graph_style = 'unicode',
         disable_commit_confirmation = true,
-
-        sections = { recent = { folded = false } },
+        sections = { recent = { folded = false, hidden = false } },
         integrations = { diffview = true, telescope = true },
       }
     )

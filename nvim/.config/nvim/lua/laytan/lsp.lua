@@ -1,14 +1,12 @@
 local util = require('lspconfig.util')
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-
 local higroup = vim.api.nvim_create_augroup('hilspiepie', {})
 
 local M = {}
 
 M.config = function(_config, on_attach)
   local dec_on_attach = function(client, bufnr)
+    -- todo removable?
     -- If the LSP client supports highlighting, set it up.
     if client.server_capabilities.documentHighlightProvider then
       vim.api.nvim_create_autocmd(
@@ -35,7 +33,7 @@ M.config = function(_config, on_attach)
 
   return vim.tbl_deep_extend(
     'keep', {
-      capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities),
+      capabilities = require('blink.cmp').get_lsp_capabilities(),
       on_attach = dec_on_attach,
     }, _config or {}
   )

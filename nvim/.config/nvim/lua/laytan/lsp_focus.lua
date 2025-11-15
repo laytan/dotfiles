@@ -42,7 +42,8 @@ M.on_focus_gained = function()
       'Focus gained after LSP was stopped after inactivity, starting LSP again',
       vim.log.levels.INFO
     )
-    vim.cmd(':LspStart')
+    pcall(vim.cmd, ':LspStart')
+    -- vim.cmd(':LspStart')
     M.lsp_stopped = false
   end
 end

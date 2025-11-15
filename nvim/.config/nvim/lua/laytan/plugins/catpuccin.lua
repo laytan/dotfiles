@@ -34,6 +34,7 @@ return {
       vim.cmd([[hi TreesitterContextBottom NONE]])
       vim.cmd([[hi NormalFloat guibg=#24273a]])
       vim.cmd([[hi Normal guibg=#1E1E2E]])
+      vim.cmd([[hi LSPInlayHint guibg=#1E1E2E]])
       vim.cmd([[hi LightBulbVirtualText guibg=#1E1E2E]])
     end
 

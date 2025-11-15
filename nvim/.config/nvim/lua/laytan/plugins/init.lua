@@ -1,16 +1,42 @@
 return {
   -- Dependency of lots of plugins.
   { 'nvim-lua/plenary.nvim', lazy = true },
-  { 'nvim-tree/nvim-web-devicons', lazy = true },
+  { 'echasnovski/mini.icons', lazy = true },
 
-  { 'folke/neodev.nvim', lazy = true, config = true },
+  {
+    'folke/lazydev.nvim',
+    ft = "lua",
+    opts = {},
+  },
 
   { 'm00qek/baleia.nvim', lazy = true },
 
+  -- Default editorconfig of neovim just doesn't work for me.
   {
-    'williamboman/mason.nvim',
-    config = true,
-    cmd = 'Mason',
+    'tpope/vim-sleuth',
+    lazy = false,
+    config = function()
+      vim.api.nvim_create_autocmd({'BufEnter'}, {
+        command = 'silent Sleuth',
+      })
+    end,
+  },
+
+  {
+    "mason-org/mason.nvim",
+    opts = {},
+  },
+
+  {
+    "hedyhli/outline.nvim",
+    lazy = true,
+    cmd = { "Outline", "OutlineOpen" },
+    keys = { -- Example mapping to toggle outline
+      { "<leader>oo", "<cmd>Outline<CR>", desc = "Toggle outline" },
+    },
+    opts = {
+      -- Your setup opts here
+    },
   },
 
   {
@@ -21,7 +47,7 @@ return {
         show_hidden = true,
       },
     },
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    dependencies = { { 'nvim-tree/nvim-web-devicons' }, },
     keys = { { '-', ':Oil<cr>' } },
   },
 
@@ -44,16 +70,16 @@ return {
     },
   },
 
-  {
-    {
-      'laytan/tailwind-sorter.nvim',
-      dir = "~/projects/tailwind-sorter.nvim",
-      dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-lua/plenary.nvim' },
-      build = 'cd formatter && npm i && npm run build',
-      config = true,
-      event = 'CmdlineEnter',
-    },
-  },
+  -- {
+  --   {
+  --     'laytan/tailwind-sorter.nvim',
+  --     dir = "~/projects/tailwind-sorter.nvim",
+  --     dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-lua/plenary.nvim' },
+  --     build = 'cd formatter && npm i && npm run build',
+  --     config = true,
+  --     event = 'CmdlineEnter',
+  --   },
+  -- },
 
   -- Normal buffer/vim operations on the quickfix list.
   { 'itchyny/vim-qfedit' },
@@ -115,32 +141,32 @@ return {
     ft = 'go',
   },
 
-  -- Shortcuts for inserting and removing debug and print statements.
-  {
-    'andrewferrier/debugprint.nvim',
-    event = 'VeryLazy',
-    opts = {
-      filetypes = {
-        ['php'] = {
-          left      = [[dump(']],
-          right     = [[');]],
-          mid_var   = [[', $]],
-          right_var = [[);]],
-        },
-        ['odin'] = {
-          left      = [[fmt.printf("]],
-          right     = [[")]],
-          mid_var   = [[", ]],
-          right_var = [[)]],
-        },
-      },
-    },
-  },
-
-  {
-    'jwalton512/vim-blade',
-    ft = 'blade',
-  },
+  -- -- Shortcuts for inserting and removing debug and print statements.
+  -- {
+  --   'andrewferrier/debugprint.nvim',
+  --   event = 'VeryLazy',
+  --   opts = {
+  --     filetypes = {
+  --       ['php'] = {
+  --         left      = [[dump(']],
+  --         right     = [[');]],
+  --         mid_var   = [[', $]],
+  --         right_var = [[);]],
+  --       },
+  --       ['odin'] = {
+  --         left      = [[fmt.printf("]],
+  --         right     = [[")]],
+  --         mid_var   = [[", ]],
+  --         right_var = [[)]],
+  --       },
+  --     },
+  --   },
+  -- },
+  --
+  -- {
+  --   'jwalton512/vim-blade',
+  --   ft = 'blade',
+  -- },
 
   {
     'alisdair/vim-armasm',
