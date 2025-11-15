@@ -5,7 +5,6 @@ vim.g.loaded_netrwPlugin = false
 
 vim.opt.encoding = 'UTF-8'
 
-vim.opt.expandtab = true
 vim.opt.smarttab = true
 vim.opt.smartindent = true
 vim.opt.autoindent = true
