@@ -5,6 +5,7 @@
 	filemode = false
 	editor = nvim
 	excludesFile = ~/.gitignore
+	autocrlf = input
 [pull]
 	rebase = false
 [init]
