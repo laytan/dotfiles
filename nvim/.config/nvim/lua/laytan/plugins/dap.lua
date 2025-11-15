@@ -39,6 +39,7 @@ return {
     'mfussenegger/nvim-dap', -- Core functionality for debugging.
     dependencies = {
       'rcarriga/nvim-dap-ui', -- Adds a UI to the debugger.
+      'nvim-neotest/nvim-nio', -- Dependency of `nvim-dap-ui`.
       'theHamsta/nvim-dap-virtual-text', -- Shows information from the debugging session next to code as virtual text.
     },
     keys = {
@@ -118,7 +119,7 @@ return {
         },
       }
 
-      dap.adapters.codelldb   = codelldb
+      dap.adapters.codelldb = codelldb
 
       local lldb_default_config = {
         -- Launch a process and debug it.
@@ -140,6 +141,9 @@ return {
 
             return vim.split(result, ' ')
           end,
+          initCommands = {
+            "command source ~/.lldbinit",
+          },
         },
         -- Find an existing process to attach to.
         {
@@ -149,6 +153,9 @@ return {
           stopOnEntry = false,
           program     = pick_program,
           pid         = daputil.pick_process,
+          initCommands = {
+            "command source ~/.lldbinit",
+          },
         },
       }
 
