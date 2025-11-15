@@ -34,7 +34,6 @@ alias update-nvim-master='asdf uninstall neovim ref:master && asdf install neovi
 [ -f "$HOME/.opam/opam-init/init.zsh" ]            && . "$HOME/.opam/opam-init/init.zsh"
 
 [ -x "$(which thefuck)" ]                          && eval $(thefuck --alias)
-[ -x "$(which jira)" ]                             && jira completion zsh > "${fpath[1]}/_jira"
 
 autoload -U compinit; compinit
 
