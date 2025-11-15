@@ -18,3 +18,4 @@ stow yabai
 stow zsh
 stow tmux
 stow lldb
+stow asdf

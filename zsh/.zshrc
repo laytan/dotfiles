@@ -9,7 +9,7 @@ source "$HOME/.zshrc_local"
 
 ZSH_THEME="amuse"
 
-plugins=(git zsh-autosuggestions autojump)
+plugins=(git zsh-autosuggestions autojump asdf)
 
 . $ZSH/oh-my-zsh.sh
 
@@ -20,9 +20,9 @@ alias drush="vendor/bin/drush"
 alias sail="vendor/bin/sail"
 [ -x "$(which bat)" ] && alias cat="bat"
 
-alias update-nvim-stable='asdf uninstall neovim stable && asdf install neovim stable'
-alias update-nvim-nightly='asdf uninstall neovim nightly && asdf install neovim nightly'
-alias update-nvim-master='asdf uninstall neovim ref:master && asdf install neovim ref:master'
+alias update-nvim-stable='asdf uninstall neovim stable && asdf install neovim stable && asdf set --home neovim stable'
+alias update-nvim-nightly='asdf uninstall neovim nightly && asdf install neovim nightly && asdf set --home neovim nightly'
+alias update-nvim-master='asdf uninstall neovim ref:master && asdf install neovim ref:master && asdf set --home neovim master'
 
 [ -f /usr/local/etc/profile.d/autojump.sh ]        && . "/usr/local/etc/profile.d/autojump.sh"
 # NVM
