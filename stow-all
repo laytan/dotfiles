@@ -19,3 +19,4 @@ stow zsh
 stow tmux
 stow lldb
 stow asdf
+stow ghostty
