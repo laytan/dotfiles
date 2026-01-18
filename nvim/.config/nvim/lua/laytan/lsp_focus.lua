@@ -26,7 +26,7 @@ M.on_focus_lost = function ()
   M.focus_timeout = timeout.set(5 * 60 * 1000, vim.schedule_wrap(function()
     M.focus_timeout = nil
     vim.notify('Focus lost for 5 minutes, stopping LSP to free resources', vim.log.levels.INFO)
-    vim.cmd(':LspStop')
+    vim.cmd(':lsp disable')
     M.lsp_stopped = true
   end))
 end
@@ -42,8 +42,7 @@ M.on_focus_gained = function()
       'Focus gained after LSP was stopped after inactivity, starting LSP again',
       vim.log.levels.INFO
     )
-    pcall(vim.cmd, ':LspStart')
-    -- vim.cmd(':LspStart')
+    vim.cmd(':lsp enable')
     M.lsp_stopped = false
   end
 end

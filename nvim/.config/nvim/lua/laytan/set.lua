@@ -8,7 +8,7 @@ vim.opt.encoding = 'UTF-8'
 vim.opt.smarttab = true
 vim.opt.smartindent = true
 vim.opt.autoindent = true
-vim.opt.shiftwidth = 4
+-- vim.opt.shiftwidth = 4
 
 vim.opt.relativenumber = true
 vim.opt.nu = true

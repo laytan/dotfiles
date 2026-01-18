@@ -108,8 +108,8 @@ M.run = function()
   local parts = split_args(M.current_command)
 
   M.running_job = Job:new({
-    command = 'time',
-    args = parts,
+    command = parts[1],
+    args = { unpack(parts, 2) },
     on_stdout = M.on_stdout,
     on_stderr = M.on_stderr,
     on_exit = M.on_exit,

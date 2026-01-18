@@ -153,29 +153,29 @@ function adapter.results(spec, result, tree)
     end
   end
 
-  local function map_errors(errors, path)
-    local neoerrors = {}
-    for _, error in ipairs(errors) do
-      -- NOTE: only accepts line, only wants errors in the file of the test.
-      if error.location.file_path == path then
-        table.insert(neoerrors, {
-          message = error.message,
-          line    = error.location.line - 1,
-        })
-      end
-    end
-    return neoerrors
-  end
-
-  local function map_short(errors, cwd)
-    local neoerrors = {}
-    for _, error in ipairs(errors) do
-      local path = remove_prefix(error.location.file_path, cwd)
-
-      table.insert(neoerrors, path .. ":" .. error.location.line .. ":" .. error.location.column .. ": " .. error.location.procedure .. "() " .. error.message)
-    end
-    return table.concat(neoerrors, "\n")
-  end
+  -- local function map_errors(errors, path)
+  --   local neoerrors = {}
+  --   for _, error in ipairs(errors) do
+  --     -- NOTE: only accepts line, only wants errors in the file of the test.
+  --     if error.location.file_path == path then
+  --       table.insert(neoerrors, {
+  --         message = error.message,
+  --         line    = error.location.line - 1,
+  --       })
+  --     end
+  --   end
+  --   return neoerrors
+  -- end
+  --
+  -- local function map_short(errors, cwd)
+  --   local neoerrors = {}
+  --   for _, error in ipairs(errors) do
+  --     local path = remove_prefix(error.location.file_path, cwd)
+  --
+  --     table.insert(neoerrors, path .. ":" .. error.location.line .. ":" .. error.location.column .. ": " .. error.location.procedure .. "() " .. error.message)
+  --   end
+  --   return table.concat(neoerrors, "\n")
+  -- end
 
   local results = {}
 
@@ -244,8 +244,8 @@ function adapter.results(spec, result, tree)
             else
               results[value.id] = {
                 status = "failed",
-                short  = map_short(test.errors, spec.cwd),
-                errors = map_errors(test.errors, value.path),
+                -- short  = map_short(test.errors, spec.cwd),
+                -- errors = map_errors(test.errors, value.path),
               }
             end
             break

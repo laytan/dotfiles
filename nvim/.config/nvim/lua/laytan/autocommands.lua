@@ -1,29 +1,18 @@
 local vim_highlight = require('vim.hl')
 
--- TODO: convert to lua, support linux
-local function openImage()
-  vim.api.nvim_exec2(
-    [[
-      fu! StartsWith(longer, shorter) abort
-          if a:shorter == ''
-              return 1
-          endif
+local function open_image()
+  local opener
+  if vim.fn.has("win32") == 1 then
+    opener = "start"
+  elseif vim.fn.has("macunix") == 1 then
+    opener = "open"
+  else
+    opener = "xdg-open"
+  end
 
-          return a:longer[0:len(a:shorter)-1] ==# a:shorter
-      endfunction
-
-      let b:prevBuffer = bufname(winbufnr(winnr('#')))
-
-      :silent exec '!open "%"'
-
-       if StartsWith(b:prevBuffer, 'NvimTree')
-           :q
-           return
-       endif
-
-       exec "normal! \<c-^>"
-    ]]
-  )
+  local current_file = vim.api.nvim_buf_get_name(0)
+  vim.fn.jobstart({ opener, current_file }, { detach = true })
+  vim.cmd('buffer #')
 end
 
 local group = vim.api.nvim_create_augroup('laytan_general', {})
@@ -33,7 +22,7 @@ vim.api.nvim_create_autocmd(
   {
     group = group,
     pattern = { '*.jpg', '*.jpeg', '*.png' },
-    callback = openImage,
+    callback = open_image,
   }
 )
 
