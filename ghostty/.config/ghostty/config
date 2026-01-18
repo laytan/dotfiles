@@ -1,2 +1,4 @@
 font-family = "SauceCodePro Nerd Font Mono"
 theme = "Catppuccin Mocha"
+app-notifications = no-clipboard-copy
+mouse-scroll-multiplier = 1
